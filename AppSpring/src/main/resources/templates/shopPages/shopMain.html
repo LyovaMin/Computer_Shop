@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Shop</title>
+</head>
+<body>
+<!--    <div th:if="${user.getRole().ADMIN}">-->
+<!--        <a th:href="@{/admin}">Перейти на страницу админа</a>-->
+<!--    </div>-->
+    <div th:insert="~{fragment::header}"></div>
+    <form th:action="@{/shop/cart}" method="get">
+        <button type="submit">Корзина</button>
+    </form>
+    <br/>
+    <br/>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.productName}">name</td>
+        <td th:text="Цена"></td>
+        <td th:text="${product.price}">price</td>
+        <td th:text="Рублей">rubles</td>
+        <td>
+            <form th:action="@{/shop/buy}" method="post">
+                <input type="hidden" name="name" th:value="${product.productName}" />
+                <button type="submit">Купить</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/shop/cart/add/{name}(name=${product.productName})}" method="post">
+                <button type="submit">Добавить в корзину</button>
+            </form>
+        </td>
+    </tr>
+</body>
+</html>

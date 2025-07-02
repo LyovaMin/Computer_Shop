@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+</head>
+<h1>Корзина</h1>
+<body>
+    <tr th:each="product : ${products}">
+    <td th:text="${product.productName}">name</td>
+    <td th:text="${product.price}">price</td>
+    <br/>
+    </tr>
+
+    <form th:action="@{/shop/cart/buyAll}" method="post">
+        <input type="hidden" name="products">
+        <button type="submit">Купить все</button>
+    </form>
+    <form th:action="@{/shop}" method="get">
+        <button type="submit">Вернуться в магазин</button>
+    </form>
+</body>
+</html>

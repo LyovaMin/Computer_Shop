@@ -1,5 +1,6 @@
 package by.lyofchik.AppSpring.Controller.Rest;
 
+import by.lyofchik.AppSpring.Filter.ProductFilter;
 import by.lyofchik.AppSpring.Mapper.ProductMapper;
 import by.lyofchik.AppSpring.Model.DTO.ProductDTO;
 import by.lyofchik.AppSpring.Model.Entities.Product;
@@ -19,16 +20,9 @@ import java.util.stream.Collectors;
 public class ProductRestController {
     ProductService productService;
 
-    @GetMapping("/DTO")
-    public List<ProductDTO> getProducts() {
-        return productService.findAll().stream()
-                .map(ProductMapper::toDTO)
-                .collect(Collectors.toList());
-    }
-
     @GetMapping
-    public List<Product> findAll() {
-        return productService.findAll();
+    public List<ProductDTO> findAll(ProductFilter filter) {
+        return null;
     }
 
     @GetMapping("/{name}")

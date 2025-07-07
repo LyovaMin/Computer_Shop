@@ -1,20 +1,17 @@
 package by.lyofchik.AppSpring.Service.ProductsService;
 
+import by.lyofchik.AppSpring.Filter.ProductFilter;
 import by.lyofchik.AppSpring.Model.DTO.ProductDTO;
+import by.lyofchik.AppSpring.Model.DTO.QPredicate;
 import by.lyofchik.AppSpring.Model.Entities.Product;
 import by.lyofchik.AppSpring.Repository.ProductRepository;
-import by.lyofchik.AppSpring.Service.EntityInterfaces.DeleteEntity;
-import by.lyofchik.AppSpring.Service.EntityInterfaces.FindAllEntities;
-import by.lyofchik.AppSpring.Service.EntityInterfaces.FindEntity;
-import by.lyofchik.AppSpring.Service.EntityInterfaces.SaveEntity;
+import by.lyofchik.AppSpring.Service.EntityInterfaces.*;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -23,10 +20,10 @@ public class ProductService implements
         DeleteEntity,
         FindEntity<Product>,
         SaveEntity<Product>,
-        FindByCategory {
+        FindByCategory,
+        FindAllEntitiesByFilter<Product> {
 
     private final ProductRepository repository;
-    private final ModelMapper modelMapper;
 
     @Override
     public boolean delete(String name) {
@@ -41,6 +38,16 @@ public class ProductService implements
     @Override
     public Product save(Product entity) {
         return repository.save(entity);
+    }
+
+    @Override
+    public List<Product> findAllByFilter(ProductFilter filter) {
+//        var predicates = QPredicate.builder()
+//                .add(filter.productName(), product.productName::containsIgnoreCase)
+//                .add(filter.price(), prodoct.Price::)
+//                .build();
+
+        return null;
     }
 
     @Override

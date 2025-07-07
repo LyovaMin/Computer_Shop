@@ -1,6 +1,5 @@
 package by.lyofchik.AppSpring.Repository;
 
-import by.lyofchik.AppSpring.Model.Entities.Category;
 import by.lyofchik.AppSpring.Model.Entities.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.*;

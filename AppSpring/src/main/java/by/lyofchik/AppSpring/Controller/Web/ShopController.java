@@ -1,6 +1,8 @@
 package by.lyofchik.AppSpring.Controller.Web;
 
+import by.lyofchik.AppSpring.Filter.ProductFilter;
 import by.lyofchik.AppSpring.Model.Entities.Product;
+import by.lyofchik.AppSpring.Model.Entities.Role;
 import by.lyofchik.AppSpring.Model.Entities.Sale;
 import by.lyofchik.AppSpring.Model.Entities.User;
 import by.lyofchik.AppSpring.Service.ProductsService.ProductService;
@@ -30,12 +32,12 @@ public class ShopController {
     List<Product> productsCart;
 
     @GetMapping
-    public String shop(Model model, @AuthenticationPrincipal Authentication authentication) {
+    public String shop(Model model, Authentication authentication) {
         model.addAttribute("products", productService.findAll());
-        User user = (User) authentication.getPrincipal();
-        //User user = userService.find(authentication.getName()).orElse(null);
+        User user = userService.find(authentication.getName()).orElseThrow();
         model.addAttribute("user", user);
-        log.info("user logged in");
+
+        log.info("user logged in {}", authentication.getAuthorities());
         return "shopPages/shopMain";
     }
 

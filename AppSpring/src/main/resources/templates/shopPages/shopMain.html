@@ -5,14 +5,17 @@
     <title>Shop</title>
 </head>
 <body>
-<!--    <div th:if="${user.getRole().ADMIN}">-->
-<!--        <a th:href="@{/admin}">Перейти на страницу админа</a>-->
-<!--    </div>-->
+    <div th:if="${user.getRole().ADMIN}">
+        <a th:href="@{/admin}">Перейти на страницу админа</a>
+    </div>
     <div th:insert="~{fragment::header}"></div>
     <form th:action="@{/shop/cart}" method="get">
         <button type="submit">Корзина</button>
     </form>
     <br/>
+    <form action="/shop">
+
+    </form>
     <br/>
     <tr th:each="product : ${products}">
         <td th:text="${product.productName}">name</td>

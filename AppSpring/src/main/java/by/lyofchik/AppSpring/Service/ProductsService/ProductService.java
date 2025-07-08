@@ -23,6 +23,7 @@ public class ProductService implements
         FindByCategory,
         FindAllEntitiesByFilter<Product> {
 
+
     private final ProductRepository repository;
 
     @Override

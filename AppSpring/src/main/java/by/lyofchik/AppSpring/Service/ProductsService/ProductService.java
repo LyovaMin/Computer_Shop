@@ -23,7 +23,6 @@ public class ProductService implements
         FindByCategory,
         FindAllEntitiesByFilter<Product> {
 
-
     private final ProductRepository repository;
 
     @Override
@@ -66,8 +65,7 @@ public class ProductService implements
 
     @Override
     public List<Product> findByCategory_CategoryName(String categoryName) {
-        List<Product> byCategoryCategoryName = repository.findByCategory_CategoryName(categoryName);
-        return byCategoryCategoryName;
+        return repository.findByCategory_CategoryName(categoryName);
     }
 
     public void delete(Product product) {

@@ -1,6 +1,5 @@
 package by.lyofchik.AppSpring.Controller.Rest;
 
-import by.lyofchik.AppSpring.Configuration.FeignConfig;
 import by.lyofchik.AppSpring.Model.DTO.ProductDTO;
 import by.lyofchik.AppSpring.Thread.FeignThread;
 import lombok.*;
@@ -15,24 +14,41 @@ import java.util.concurrent.*;
 @RequestMapping("/feign")
 @AllArgsConstructor
 public class FeignRestController {
-    FeignConfig feign;
     FeignThread feignThread;
 
     @GetMapping
-    public List<ProductDTO> findAll() throws Exception {
-        log.info("Вызван Feign");
+    public Object findAll() {
         List<ProductDTO> list = new ArrayList<>();
+        //CompletableFuture
         ExecutorService executor = Executors.newFixedThreadPool(3);
-        List<Future<List<ProductDTO>>> future = new ArrayList<>();
-
-        for (int i = 0; i < 3; i++) {
-            future.add(executor.submit(feignThread));
-        }
-
-        for (Future<List<ProductDTO>> future1 : future) {
-            list.addAll(future1.get());
-        }
-
-        return list;
+//        try {
+//            List<Future<List<ProductDTO>>> future = new ArrayList<>();
+//
+//            for (int i = 0; i < 3; i++) {
+//                future.add(executor.submit(feignThread));
+//            }
+//
+//            for (Future<List<ProductDTO>> future1 : future) {
+//                try {
+//                    list.addAll(future1.get(50, TimeUnit.SECONDS));
+//                } catch (InterruptedException | ExecutionException e) {
+//                    log.error("Error by future {} ,{}", future1, e.getMessage());
+//                }
+//            }
+//            if (list.isEmpty()) {
+//                return ApiError.;
+//            }
+//            return list;
+//        } catch (Exception e) {
+//            try {
+//                executor.shutdown();
+//                executor.awaitTermination(10,TimeUnit.SECONDS);
+//            } catch (InterruptedException ex) {
+//                log.error("---------------");
+//            }
+//        } finally {
+//            executor.shutdownNow();
+//        }
+        return  list;
     }
 }

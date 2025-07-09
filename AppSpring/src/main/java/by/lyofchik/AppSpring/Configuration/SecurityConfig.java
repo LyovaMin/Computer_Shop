@@ -12,7 +12,7 @@ import static by.lyofchik.AppSpring.Model.Entities.Role.*;
 @Slf4j
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration {
+public class SecurityConfig {
     @Bean
     public SecurityFilterChain security(HttpSecurity http) throws Exception {
         http

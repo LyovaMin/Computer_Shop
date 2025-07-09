@@ -1,19 +1,23 @@
 package by.lyofchik.AppSpring.Service.MailService;
 
-import lombok.AllArgsConstructor;
+import by.lyofchik.AppSpring.Model.DTO.EmailRequest;
+import by.lyofchik.AppSpring.Model.DTO.EmailResponseDto;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.pretty.MessageHelper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @Data
+@RequiredArgsConstructor
 public class MailService {
-    @Autowired
-    private JavaMailSender mailSender;
+
+    private final JavaMailSender mailSender;
     @Value("${spring.mail.username}")
     private String from;
 
@@ -24,6 +28,13 @@ public class MailService {
         message.setSubject("Привет");
         message.setText(messageText);
         message.setFrom(from);
-        mailSender.send(message);
+        MessageHelper messageHelper = new MessageHelper(message);
+        messageHelper.
+                mailSender.send(message);
+    }
+
+
+    public Optional<EmailResponseDto> sendEmail(EmailRequest emailRequest) {
+        return Optional.empty();
     }
 }

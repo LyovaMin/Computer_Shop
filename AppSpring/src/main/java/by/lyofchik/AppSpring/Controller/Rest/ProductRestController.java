@@ -1,5 +1,6 @@
 package by.lyofchik.AppSpring.Controller.Rest;
 
+import by.lyofchik.AppSpring.CustomException.CustomException;
 import by.lyofchik.AppSpring.Filter.ProductFilter;
 import by.lyofchik.AppSpring.Mapper.ProductMapper;
 import by.lyofchik.AppSpring.Model.DTO.ProductDTO;
@@ -26,8 +27,8 @@ public class ProductRestController {
     }
 
     @GetMapping("/{name}")
-    public Optional<Product> findByName(@PathVariable String name) {
-        return productService.find(name);
+    public Object findByName(@PathVariable String name) {
+        return productService.find(name).orElseThrow(()-> new CustomException(CustomException.ApiError.NICKNAME_IS_BUSY.getDefaultMessage()));
     }
 
     @GetMapping("/category/{categoryName}")

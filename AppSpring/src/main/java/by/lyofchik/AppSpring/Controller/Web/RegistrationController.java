@@ -31,7 +31,7 @@ public class RegistrationController {
     @PostMapping
     public String registration(@Validated @ModelAttribute RegistrationDTO registrationDTO,
                                BindingResult bindingResult,
-                               RedirectAttributes redirectAttributes) throws CustomException {
+                               RedirectAttributes redirectAttributes)  {
         log.info("Registration form received");
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("registrationDTO", registrationDTO);
@@ -40,7 +40,7 @@ public class RegistrationController {
         }
 
         if(userService.find(registrationDTO.getUserName()).isPresent()){
-            throw new CustomException(CustomException.ApiError.NICKNAME_IS_BUSY);
+            throw new CustomException(CustomException.ApiError.NICKNAME_IS_BUSY.getDefaultMessage());
         }
 
         User user = userMapper.toUser(registrationDTO);

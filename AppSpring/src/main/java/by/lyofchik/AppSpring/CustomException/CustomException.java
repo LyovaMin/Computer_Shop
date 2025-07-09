@@ -4,13 +4,12 @@ import lombok.*;
 import org.springframework.http.HttpStatus;
 
 @Getter
-public class CustomException extends Exception {
-    private final ApiError apiError;
+public class CustomException extends RuntimeException {
 
-    public CustomException(ApiError apiError) {
-        super(apiError.getDefaultMessage());
-        this.apiError = apiError;
+    public CustomException(String message) {
+        super(message);
     }
+
 
     @AllArgsConstructor
     @Getter

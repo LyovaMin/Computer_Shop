@@ -14,5 +14,4 @@ public class Category {
 
     @Column(name = "categoryname", nullable = false, length = 64)
     private String categoryName;
-
 }

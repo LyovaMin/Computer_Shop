@@ -28,9 +28,9 @@ public class MailService {
         message.setSubject("Привет");
         message.setText(messageText);
         message.setFrom(from);
-        MessageHelper messageHelper = new MessageHelper(message);
-        messageHelper.
-                mailSender.send(message);
+        //MessageHelper messageHelper = new MessageHelper(message);
+
+        mailSender.send(message);
     }
 
 

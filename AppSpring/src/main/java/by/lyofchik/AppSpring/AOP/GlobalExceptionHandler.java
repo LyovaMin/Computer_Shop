@@ -1,4 +1,4 @@
-package by.lyofchik.AppSpring.Advice;
+package by.lyofchik.AppSpring.AOP;
 
 import by.lyofchik.AppSpring.CustomException.CustomException;
 import by.lyofchik.AppSpring.Model.DTO.CommonResponse;

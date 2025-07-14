@@ -17,10 +17,11 @@ public class ExecutorServiceConfig implements AsyncConfigurer{
     @Bean
     ExecutorService executor() {
         return new ThreadPoolExecutor(
-                1,
+                5,
                 10,
-                60L, TimeUnit.SECONDS,
-                new LinkedBlockingQueue<>(20) // возможная очередь потоков
+                10L, TimeUnit.SECONDS,
+                new LinkedBlockingQueue<>(40), // возможная очередь потоков
+                new ThreadPoolExecutor.CallerRunsPolicy() // Политика при переполнении
         );
         // ThreadPoolExecutor для обработки отказа при переполнении очереди
         // можно переопределить AsyncConfigurer методы

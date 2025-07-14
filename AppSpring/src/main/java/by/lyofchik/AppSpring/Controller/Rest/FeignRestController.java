@@ -1,6 +1,7 @@
 package by.lyofchik.AppSpring.Controller.Rest;
 
 import by.lyofchik.AppSpring.Model.DTO.ProductDTO;
+import by.lyofchik.AppSpring.Service.UserService.UserService;
 import by.lyofchik.AppSpring.Thread.FeignThread;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -16,28 +17,40 @@ import java.util.concurrent.*;
 public class FeignRestController {
     FeignThread feignThread;
     ExecutorService executor;
+    UserService userService;
 
     @GetMapping
     public Object findAll() {
         List<ProductDTO> list = new ArrayList<>();
         //CompletableFuture
-        List<Future<List<ProductDTO>>> future = new ArrayList<>();
+        List<CompletableFuture<List<ProductDTO>>> futures = new ArrayList<>();
+        //List<Future<List<ProductDTO>>> future = new ArrayList<>();
 
-        for (int i = 0; i < 40; i++) {
-            log.info(feignThread.toString());
-            future.add(executor.submit(feignThread));
+        for (int i = 0; i < 20; i++) {
+            CompletableFuture<List<ProductDTO>> future = CompletableFuture.supplyAsync(() -> {
+                try {
+                    return feignThread.call();
+                }catch (Exception e){
+                    log.error(e.getMessage());
+                    return null;
+                }
+            }, executor);
+            futures.add(future);
         }
 
-        for (Future<List<ProductDTO>> future1 : future) {
-            try {
-                list.addAll(future1.get(50, TimeUnit.SECONDS));
-            } catch (InterruptedException | ExecutionException | TimeoutException e) {
-                log.error("Error by future {} ,{}", future1, e.getMessage());
-            }
-        }
-
-        //executor.shutdown();
-        return  list;
+        return CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
+                .thenApply(v -> {
+                    futures.forEach(future -> {
+                        try{
+                            log.info(future.toString());
+                            list.addAll(future.join());
+                        }catch (Exception e){
+                            log.error(e.getMessage());
+                        }
+                    });
+                    //executor.shutdown();
+                    return list;
+                });
 
 
 //        try {

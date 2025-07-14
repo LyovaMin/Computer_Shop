@@ -3,6 +3,7 @@ package by.lyofchik.AppSpring.Configuration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -12,6 +13,7 @@ import static by.lyofchik.AppSpring.Model.Entities.Role.*;
 @Slf4j
 @Configuration
 @EnableWebSecurity
+@EnableAspectJAutoProxy
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain security(HttpSecurity http) throws Exception {
@@ -31,8 +33,7 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/login")
                         .permitAll()
                 );
-        log.info("Security configuration has been successfully initialized");
+
         return http.build();
     }
-
 }

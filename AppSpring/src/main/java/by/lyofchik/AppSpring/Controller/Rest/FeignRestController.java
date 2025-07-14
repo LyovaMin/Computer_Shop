@@ -15,12 +15,31 @@ import java.util.concurrent.*;
 @AllArgsConstructor
 public class FeignRestController {
     FeignThread feignThread;
+    ExecutorService executor;
 
     @GetMapping
     public Object findAll() {
         List<ProductDTO> list = new ArrayList<>();
         //CompletableFuture
-        ExecutorService executor = Executors.newFixedThreadPool(3);
+        List<Future<List<ProductDTO>>> future = new ArrayList<>();
+
+        for (int i = 0; i < 40; i++) {
+            log.info(feignThread.toString());
+            future.add(executor.submit(feignThread));
+        }
+
+        for (Future<List<ProductDTO>> future1 : future) {
+            try {
+                list.addAll(future1.get(50, TimeUnit.SECONDS));
+            } catch (InterruptedException | ExecutionException | TimeoutException e) {
+                log.error("Error by future {} ,{}", future1, e.getMessage());
+            }
+        }
+
+        //executor.shutdown();
+        return  list;
+
+
 //        try {
 //            List<Future<List<ProductDTO>>> future = new ArrayList<>();
 //
@@ -49,6 +68,5 @@ public class FeignRestController {
 //        } finally {
 //            executor.shutdownNow();
 //        }
-        return  list;
     }
 }

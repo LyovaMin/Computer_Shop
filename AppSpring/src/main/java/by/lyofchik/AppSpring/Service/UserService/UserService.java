@@ -7,6 +7,12 @@ import by.lyofchik.AppSpring.Service.EntityInterfaces.FindAllEntities;
 import by.lyofchik.AppSpring.Service.EntityInterfaces.FindEntity;
 import by.lyofchik.AppSpring.Service.EntityInterfaces.SaveEntity;
 import by.lyofchik.AppSpring.Service.Hashing.PasswordHasher;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.PropertyException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +20,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.io.StringWriter;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -77,6 +84,20 @@ public class UserService implements
                         Collections.singleton(user.getRole())
                 ))
                 .orElseThrow(() -> new UsernameNotFoundException("Failed to find " + username));
+    }
+
+    public String toJSON(User user) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(user);
+    }
+
+    public String toXML(User user) throws JAXBException {
+        JAXBContext jaxbContext = JAXBContext.newInstance(User.class);
+        Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+        jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        StringWriter writer = new StringWriter();
+        jaxbMarshaller.marshal(user, writer);
+        return writer.toString();
     }
 }
 

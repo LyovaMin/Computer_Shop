@@ -8,6 +8,12 @@ import by.lyofchik.AppSpring.Model.Entities.User;
 import by.lyofchik.AppSpring.Service.ProductsService.ProductService;
 import by.lyofchik.AppSpring.Service.SaleService.SaleService;
 import by.lyofchik.AppSpring.Service.UserService.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.xml.bind.JAXB;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -18,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.StringWriter;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -37,7 +44,7 @@ public class ShopController {
         User user = userService.find(authentication.getName()).orElseThrow();
         model.addAttribute("user", user);
 
-        log.info("user logged in {}", authentication.getAuthorities());
+        log.info("user logged in {}", authentication);
         return "shopPages/shopMain";
     }
 

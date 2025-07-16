@@ -9,5 +9,5 @@ import lombok.Data;
 public class ProductDTO {
     @NotBlank
     private String productName;
-    private int price;
+    private Integer price;
 }

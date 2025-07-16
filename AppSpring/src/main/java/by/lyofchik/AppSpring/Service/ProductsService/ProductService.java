@@ -1,17 +1,22 @@
 package by.lyofchik.AppSpring.Service.ProductsService;
 
 import by.lyofchik.AppSpring.Filter.ProductFilter;
+import by.lyofchik.AppSpring.Mapper.ProductMapper;
 import by.lyofchik.AppSpring.Model.DTO.ProductDTO;
 import by.lyofchik.AppSpring.Model.DTO.QPredicate;
 import by.lyofchik.AppSpring.Model.Entities.Product;
 import by.lyofchik.AppSpring.Repository.ProductRepository;
 import by.lyofchik.AppSpring.Service.EntityInterfaces.*;
+import com.querydsl.jpa.impl.JPAQuery;
+import jakarta.persistence.EntityManager;
 import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static by.lyofchik.AppSpring.Model.QEntities.QProduct.product;
 
 @Service
 @AllArgsConstructor
@@ -24,6 +29,8 @@ public class ProductService implements
         FindAllEntitiesByFilter<Product> {
 
     private final ProductRepository repository;
+    private final EntityManager entityManager;
+
 
     @Override
     public boolean delete(String name) {
@@ -42,12 +49,17 @@ public class ProductService implements
 
     @Override
     public List<Product> findAllByFilter(ProductFilter filter) {
-//        var predicates = QPredicate.builder()
-//                .add(filter.productName(), product.productName::containsIgnoreCase)
-//                .add(filter.price(), prodoct.Price::)
-//                .build();
+        var predicates = QPredicate.builder()
+                .add(filter.productName(), product.productName::containsIgnoreCase)
+                .add(filter.price(), product.price::lt)
+                .add(filter.categoryName(), product.category.categoryName::containsIgnoreCase)
+                .build();
 
-        return null;
+        return new JPAQuery<Product>(entityManager)
+                .select(product)
+                .from(product)
+                .where(predicates)
+                .fetch();
     }
 
     @Override
@@ -72,4 +84,7 @@ public class ProductService implements
         repository.delete(product);
     }
 
+    public Product findById(int id) {
+        return repository.findById(id).orElse(null);
+    }
 }

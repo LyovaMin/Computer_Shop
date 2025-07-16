@@ -1,26 +1,35 @@
 package by.lyofchik.AppSpring.Controller.Rest;
 
-import by.lyofchik.AppSpring.CustomException.CustomException;
-import by.lyofchik.AppSpring.Model.DTO.CommonResponse;
 import by.lyofchik.AppSpring.Model.DTO.EmailRequest;
-import by.lyofchik.AppSpring.Model.DTO.EmailResponseDto;
 import by.lyofchik.AppSpring.Service.MailService.MailService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Arrays;
 
 @RestController
 @RequestMapping("/mail")
 @RequiredArgsConstructor
+@Slf4j
 public class EmailSenderRestController {
 
     private final MailService mailService;
 
     @GetMapping
-    public void sendEmail(@RequestParam String email, @RequestParam String message) {
-        mailService.send(email, message);
+    public void sendEmail(@RequestParam String email, @RequestParam String message, @RequestParam byte[] data) {
+        var request = EmailRequest.builder()
+                .email(email)
+                .message(message)
+                //.document(data)
+                .build();
+        mailService.send(request);
+    }
+
+    @PostMapping
+    public ResponseEntity<Object> adminPost(@ModelAttribute EmailRequest emailRequest){
+        log.info("Received request for email: {}", emailRequest.getEmail());
+        mailService.send(emailRequest);
+        return null;
     }
 }
 

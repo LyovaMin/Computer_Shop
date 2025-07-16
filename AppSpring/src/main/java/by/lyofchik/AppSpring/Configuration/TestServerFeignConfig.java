@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
+import java.util.concurrent.TimeUnit;
+
 @Configuration
 @EnableAspectJAutoProxy
 public class TestServerFeignConfig implements FeignClientConfigurer {
@@ -18,8 +20,9 @@ public class TestServerFeignConfig implements FeignClientConfigurer {
     @Bean
     public Request.Options options() {
         return new Request.Options(
-                5000,
-                10000
+                5L, TimeUnit.SECONDS,
+                10L, TimeUnit.SECONDS,
+                true
         );
     }
 

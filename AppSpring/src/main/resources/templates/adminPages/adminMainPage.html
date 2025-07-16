@@ -1,11 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Admin</title>
 </head>
 <body>
-    <h1>Админ</h1>
-
+<h1>Админ</h1>
+<div>
+    <a th:href="@{/shop}">Страница магазина</a>
+</div>
+<form th:action="@{/admin/send}" method="post" enctype="multipart/form-data">
+    Отправить сообщение
+    <label for="email">Почта
+        <input id="email" type="text" name="email" required>
+    </label>
+    <label for="message">Сообщение
+        <input id="message" type="text" name="message" required>
+    </label>
+    <label for="document">Выберите фото
+        <input id="document" type="file" name="document" accept="image/*">
+    </label>
+    <button type="submit">Отправить</button>
+</form>
 </body>
 </html>

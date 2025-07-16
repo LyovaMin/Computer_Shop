@@ -5,17 +5,34 @@
     <title>Shop</title>
 </head>
 <body>
-    <div th:if="${user.getRole().ADMIN}">
+    <div sec:authorize="hasAuthority('ADMIN')">
         <a th:href="@{/admin}">Перейти на страницу админа</a>
     </div>
+    <form action="/shop">
+        <label for="productName">Название:
+            <input id="productName" type="text" name="productName">
+        </label>
+        <label for="price">Цена:
+            <input id="price" type="number" name="price">
+        </label>
+        <label for="categoryName">
+            <select id="categoryName" name="categoryName">
+                <option value="">Все товары</option>
+                <option value="Видеокарты">Видеокарты</option>
+                <option value="Жесткие Диски">Жесткие Диски</option>
+                <option value="Мониторы">Мониторы</option>
+                <option value="Наушники">Наушники</option>
+                <option value="Ноутбуки">Ноутбуки</option>
+                <option value="Процессоры">Процессоры</option>
+            </select>
+        </label>
+        <button type="submit">Поиск</button>
+    </form>
     <div th:insert="~{fragment::header}"></div>
     <form th:action="@{/shop/cart}" method="get">
         <button type="submit">Корзина</button>
     </form>
     <br/>
-    <form action="/shop">
-
-    </form>
     <br/>
     <tr th:each="product : ${products}">
         <td th:text="${product.productName}">name</td>

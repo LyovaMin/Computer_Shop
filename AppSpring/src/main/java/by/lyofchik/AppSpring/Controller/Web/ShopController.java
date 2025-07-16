@@ -39,10 +39,10 @@ public class ShopController {
     List<Product> productsCart;
 
     @GetMapping
-    public String shop(Model model, Authentication authentication) {
-        model.addAttribute("products", productService.findAll());
+    public String shop(Model model, Authentication authentication, ProductFilter filter) {
+        model.addAttribute("products", productService.findAllByFilter(filter));
         User user = userService.find(authentication.getName()).orElseThrow();
-        model.addAttribute("user", user);
+        model.addAttribute("user", authentication);
 
         log.info("user logged in {}", authentication);
         return "shopPages/shopMain";

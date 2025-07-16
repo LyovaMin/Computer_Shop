@@ -2,6 +2,7 @@ package by.lyofchik.AppSpring.Model.DTO;
 
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.NumberPath;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -21,7 +22,6 @@ public class QPredicate {
         if(object != null){
             predicates.add(function.apply(object));
         }
-
         return this;
     }
 

@@ -1,7 +1,7 @@
 package by.lyofchik.AppSpring.Controller.Rest;
 
-import by.lyofchik.AppSpring.Model.DTO.ProductDTO;
-import by.lyofchik.AppSpring.Service.UserService.UserService;
+import by.lyofchik.AppSpring.Model.Entities.Product;
+import by.lyofchik.AppSpring.Service.ProductsService.ProductService;
 import by.lyofchik.AppSpring.Thread.FeignThread;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -17,40 +17,75 @@ import java.util.concurrent.*;
 public class FeignRestController {
     FeignThread feignThread;
     ExecutorService executor;
-    UserService userService;
+    ProductService productService;
 
     @GetMapping
     public Object findAll() {
-        List<ProductDTO> list = new ArrayList<>();
-        //CompletableFuture
-        List<CompletableFuture<List<ProductDTO>>> futures = new ArrayList<>();
-        //List<Future<List<ProductDTO>>> future = new ArrayList<>();
+        List<Product> list = new ArrayList<>();
+        List<CompletableFuture<Product>> futures = new ArrayList<>();
 
-        for (int i = 0; i < 20; i++) {
-            CompletableFuture<List<ProductDTO>> future = CompletableFuture.supplyAsync(() -> {
-                try {
-                    return feignThread.call();
-                }catch (Exception e){
+        for (int i = 0; i < 52; i++) {
+            int finalI = i;
+            CompletableFuture<Product> future = CompletableFuture.supplyAsync(() -> {
+                try{
+                    TimeUnit.SECONDS.sleep(3);
+                    return productService.findById(finalI);
+                } catch (RuntimeException | InterruptedException e) {
                     log.error(e.getMessage());
-                    return null;
+                    throw new RuntimeException(e);
                 }
-            }, executor);
+                    },
+                    executor);
             futures.add(future);
         }
 
         return CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
                 .thenApply(v -> {
-                    futures.forEach(future -> {
+                    futures.stream()
+                            .filter(f -> {
+                        try {
+                            return f.get() != null;
+                        } catch (InterruptedException | ExecutionException e) {
+                            log.error(e.getMessage());
+                            throw new RuntimeException(e);
+                        }
+                    })
+                            .forEach(future -> {
                         try{
-                            log.info(future.toString());
-                            list.addAll(future.join());
-                        }catch (Exception e){
+                            list.add(future.get());
+                        } catch (RuntimeException | ExecutionException | InterruptedException e) {
                             log.error(e.getMessage());
                         }
                     });
-                    //executor.shutdown();
                     return list;
                 });
+
+
+//        for (int i = 0; i < 20; i++) {
+//            CompletableFuture<List<ProductDTO>> future = CompletableFuture.supplyAsync(() -> {
+//                try {
+//                    return feignThread.call();
+//                }catch (Exception e){
+//                    log.error(e.getMessage());
+//                    return null;
+//                }
+//            }, executor);
+//            futures.add(future);
+//        }
+//
+//        return CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
+//                .thenApply(v -> {
+//                    futures.forEach(future -> {
+//                        try{
+//                            log.info(future.toString());
+//                            list.addAll(future.join());
+//                        }catch (Exception e){
+//                            log.error(e.getMessage());
+//                        }
+//                    });
+//                    //executor.shutdown();
+//                    return list;
+//                });
 
 
 //        try {

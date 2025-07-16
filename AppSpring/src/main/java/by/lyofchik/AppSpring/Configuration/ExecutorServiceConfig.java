@@ -17,8 +17,8 @@ public class ExecutorServiceConfig implements AsyncConfigurer{
     @Bean
     ExecutorService executor() {
         return new ThreadPoolExecutor(
-                5,
-                10,
+                20,
+                20,
                 10L, TimeUnit.SECONDS,
                 new LinkedBlockingQueue<>(40), // возможная очередь потоков
                 new ThreadPoolExecutor.CallerRunsPolicy() // Политика при переполнении

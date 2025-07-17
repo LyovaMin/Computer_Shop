@@ -9,18 +9,26 @@
 <div>
     <a th:href="@{/shop}">Страница магазина</a>
 </div>
+<br/>
 <form th:action="@{/admin/send}" method="post" enctype="multipart/form-data">
     Отправить сообщение
+    <br/>
     <label for="email">Почта
         <input id="email" type="text" name="email" required>
     </label>
+    <br/>
     <label for="message">Сообщение
         <input id="message" type="text" name="message" required>
     </label>
+    <br/>
     <label for="document">Выберите фото
         <input id="document" type="file" name="document" accept="image/*">
     </label>
+    <br/>
     <button type="submit">Отправить</button>
+    <div th:if="${errors}">
+        <p style="color: crimson" th:each="error : ${errors}" th:text="${error.getDefaultMessage}"> </p>
+    </div>
 </form>
 </body>
 </html>

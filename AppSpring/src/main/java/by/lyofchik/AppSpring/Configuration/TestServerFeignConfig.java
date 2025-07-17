@@ -27,6 +27,6 @@ public class TestServerFeignConfig implements FeignClientConfigurer {
     }
 
     // ErrorDecoder обработчик ошибкок exception decoder
-    // RequestInterceptor заголовки типо "authorization"
+    // RequestInterceptor добавление заголовков типо "authorization"
     // Retryer для повторных попыток подключения
 }

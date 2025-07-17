@@ -1,11 +1,9 @@
 package by.lyofchik.AppSpring.Model.DTO;
 
+import by.lyofchik.AppSpring.Validation.FileNotEmpty;
+import jakarta.validation.constraints.*;
 import lombok.*;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.io.IOException;
 
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -13,8 +11,10 @@ import java.io.IOException;
 @Setter
 @Builder
 public class EmailRequest {
+    @FileNotEmpty(message = "Загрузите файл")
     private MultipartFile document;
     private String message;
+    @Email(message = "Введите корректный email")
     private String email;
 
 //    EmailRequest(MultipartFile document, String message, String email) {
@@ -23,7 +23,7 @@ public class EmailRequest {
 //        try {
 //            this.document = document.getBytes();
 //        } catch (IOException e) {
-//            this.document = null;
+//             throw new IOException();
 //        }
 //    }
 }

@@ -9,7 +9,6 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @Configuration
 @EnableAspectJAutoProxy
 public class MapperConfig {
-
     @Bean
     public static ModelMapper modelMapper(){
         ModelMapper modelMapper = new ModelMapper();

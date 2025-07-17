@@ -85,6 +85,6 @@ public class ProductService implements
     }
 
     public Product findById(int id) {
-        return repository.findById(id).orElse(null);
+        return repository.findById(id).orElseThrow();
     }
 }

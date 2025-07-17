@@ -10,7 +10,6 @@ public class CustomException extends RuntimeException {
         super(message);
     }
 
-
     @AllArgsConstructor
     @Getter
     public enum ApiError {

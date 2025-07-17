@@ -6,10 +6,13 @@ import by.lyofchik.AppSpring.Service.MailService.MailService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Arrays;
 
@@ -26,7 +29,14 @@ public class AdminController {
     }
 
     @PostMapping("/send")
-    public String adminPost(@ModelAttribute EmailRequest emailRequest){
+    public String adminPost(@Validated @ModelAttribute EmailRequest emailRequest,
+                            BindingResult bindingResult,
+                            RedirectAttributes redirectAttributes){
+        if(bindingResult.hasErrors()){
+            bindingResult.getAllErrors().forEach(error -> log.info(error.getDefaultMessage()));
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            return "redirect:/admin";
+        }
         mailService.send(emailRequest);
         return "redirect:/admin";
     }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/mail")
 @RequiredArgsConstructor
 @Slf4j
+// Не работает
 public class EmailSenderRestController {
 
     private final MailService mailService;

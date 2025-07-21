@@ -8,10 +8,11 @@
 <h1>Логин</h1>
 <form th:action="@{/login}" method="post">
     <label for="username">Login:
-        <input id="username" type="text" name="username">
-    </label><br/>
+        <input id="username" type="text" name="username" th:value="*{username}">
+    </label>
+    <br/>
     <label for="password">Password:
-        <input id="password" type="password" name="password">
+        <input id="password" type="password" name="password" th:value="*{password}">
     </label>
     <button type="submit">Enter</button>
 </form>

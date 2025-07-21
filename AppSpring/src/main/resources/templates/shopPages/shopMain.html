@@ -10,22 +10,34 @@
     </div>
     <form action="/shop">
         <label for="productName">Название:
-            <input id="productName" type="text" name="productName">
+            <input id="productName" type="text" name="productName" th:value="${filter.productName}">
         </label>
         <label for="price">Цена:
-            <input id="price" type="number" name="price">
+            <input id="price" type="number" name="price" th:value="${filter.price}">
         </label>
         <label for="categoryName">
             <select id="categoryName" name="categoryName">
                 <option value="">Все товары</option>
-                <option value="Видеокарты">Видеокарты</option>
-                <option value="Жесткие Диски">Жесткие Диски</option>
-                <option value="Мониторы">Мониторы</option>
-                <option value="Наушники">Наушники</option>
-                <option value="Ноутбуки">Ноутбуки</option>
-                <option value="Процессоры">Процессоры</option>
+                <option th:value="'Видеокарты'" th:selected="${filter.categoryName == 'Видеокарты'}">Видеокарты</option>
+                <option th:value="'Жесткие Диски'" th:selected="${filter.categoryName == 'Жесткие Диски'}">Жесткие Диски</option>
+                <option th:value="'Мониторы'" th:selected="${filter.categoryName == 'Мониторы'}">Мониторы</option>
+                <option th:value="'Наушники'" th:selected="${filter.categoryName == 'Наушники'}">Наушники</option>
+                <option th:value="'Ноутбуки'" th:selected="${filter.categoryName == 'Ноутбуки'}">Ноутбуки</option>
+                <option th:value="'Процессоры'" th:selected="${filter.categoryName == 'Процессоры'}">Процессоры</option>
             </select>
         </label>
+        <div>
+            <label for="page">Страница
+                <input id="page" type="number" name="page" th:value="${products.metaData.page}">
+            </label>
+            <label for="size">Размер страницы
+                <select id="size" name="size" th:value="${products.metaData.size}">
+                    <option>10</option>
+                    <option>20</option>
+                    <option>30</option>
+                </select>
+            </label>
+        </div>
         <button type="submit">Поиск</button>
     </form>
     <div th:insert="~{fragment::header}"></div>
@@ -34,7 +46,7 @@
     </form>
     <br/>
     <br/>
-    <tr th:each="product : ${products}">
+    <tr th:each="product : ${products.list}">
         <td th:text="${product.productName}">name</td>
         <td th:text="Цена"></td>
         <td th:text="${product.price}">price</td>

@@ -24,6 +24,9 @@ public class FeignRestController {
         List<Product> list = new ArrayList<>();
         List<CompletableFuture<Product>> futures = new ArrayList<>();
 
+        ExecutorService executorService = Executors.newFixedThreadPool(5);
+
+
         for (int i = 0; i < 52; i++) {
             int finalI = i;
             CompletableFuture<Product> future = CompletableFuture.supplyAsync(() -> {
@@ -58,6 +61,8 @@ public class FeignRestController {
                         }
                     });
                     return list;
+
+
                 });
 
 

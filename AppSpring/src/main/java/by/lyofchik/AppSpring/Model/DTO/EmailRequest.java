@@ -13,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class EmailRequest {
     @FileNotEmpty(message = "Загрузите файл")
     private MultipartFile document;
+//    @FileNotEmpty(message = "Загрузите файл")
+//    private byte [] document;
     private String message;
     @Email(message = "Введите корректный email")
     private String email;

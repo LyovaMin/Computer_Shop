@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/AppSpring/src/main/resources/V6__task-alter.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/AppSpring/src/main/resources/db/migration/V1__insert-product.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/AppSpring/src/main/resources/db/migration/V2__task-find-second.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/AppSpring/src/main/resources/db/migration/V3__delete-product.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/AppSpring/src/main/resources/db/migration/V4__task-join.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/AppSpring/src/main/resources/db/migration/V5__task-acid.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/AppSpring/src/main/resources/db/migration/V7__agregate-func.sql" dialect="TSQL" />
+  </component>
+</project>

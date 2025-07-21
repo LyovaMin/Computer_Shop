@@ -30,7 +30,6 @@ public class MailService {
             helper.setTo(emailRequest.getEmail());
             helper.setSubject("Привет");
             helper.setText(emailRequest.getMessage());
-
             ByteArrayResource resource = new ByteArrayResource(emailRequest.getDocument().getBytes());
             helper.addAttachment("meow.jpg", resource, "image/jpeg");
 

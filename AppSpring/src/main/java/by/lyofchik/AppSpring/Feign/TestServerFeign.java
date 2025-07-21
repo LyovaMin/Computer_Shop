@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
-@FeignClient(name = "meow", url = "localhost:9090",configuration = TestServerFeignConfig.class )
+@FeignClient(name = "meow", url = "localhost:9090", configuration = TestServerFeignConfig.class )
 public interface TestServerFeign {
     @GetMapping("/main")
     List<ProductDTO> findAll();

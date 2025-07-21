@@ -1,6 +1,8 @@
 package by.lyofchik.AppSpring.Controller.Rest;
 
+import by.lyofchik.AppSpring.Model.DTO.UserResponseDTO;
 import by.lyofchik.AppSpring.Model.Entities.User;
+import by.lyofchik.AppSpring.Repository.UserRepository;
 import by.lyofchik.AppSpring.Service.Hashing.PasswordHasher;
 import by.lyofchik.AppSpring.Service.UserService.UserService;
 import lombok.*;
@@ -19,7 +21,7 @@ public class UserRestController {
     UserService userService;
 
     @GetMapping
-    List<User> users() {
+    List<UserResponseDTO> users() {
         return userService.findAll();
     }
 
@@ -27,8 +29,7 @@ public class UserRestController {
     @PostMapping("/save")
     User saveUser(@RequestBody @Validated User user) {
         user.setPassword(PasswordHasher.hash(user.getPassword()));
-        User save = userService.save(user);
-        return save;
+        return userService.save(user);
     }
 
     @GetMapping("/{name}")
@@ -37,8 +38,9 @@ public class UserRestController {
     }
 
     @Transactional
-    @DeleteMapping("/delete/{name}")
-    boolean deleteUser(@PathVariable String name) {
-        return userService.delete(name);
+    @DeleteMapping("/delete/{id}")
+    boolean deleteUser(@PathVariable int id) {
+        userService.deleteById(id);
+        return true;
     }
 }

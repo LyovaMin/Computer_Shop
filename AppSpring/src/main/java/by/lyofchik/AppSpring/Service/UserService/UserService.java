@@ -1,5 +1,7 @@
 package by.lyofchik.AppSpring.Service.UserService;
 
+import by.lyofchik.AppSpring.Mapper.UserMapper;
+import by.lyofchik.AppSpring.Model.DTO.UserResponseDTO;
 import by.lyofchik.AppSpring.Model.Entities.User;
 import by.lyofchik.AppSpring.Repository.UserRepository;
 import by.lyofchik.AppSpring.Service.EntityInterfaces.DeleteEntity;
@@ -31,7 +33,7 @@ import java.util.Optional;
 public class UserService implements
         ChangePassword,
         DeleteEntity,
-        FindAllEntities<User>,
+        FindAllEntities<UserResponseDTO>,
         FindEntity<User>,
         SaveEntity<User>,
         UserDetailsService {
@@ -56,8 +58,10 @@ public class UserService implements
     }
 
     @Override
-    public List<User> findAll() {
-        return repository.findAll();
+    public List<UserResponseDTO> findAll() {
+        return repository.findAll().stream()
+                .map(UserMapper::toResponseDTO)
+                .toList();
     }
 
     @Override
@@ -98,6 +102,10 @@ public class UserService implements
         StringWriter writer = new StringWriter();
         jaxbMarshaller.marshal(user, writer);
         return writer.toString();
+    }
+
+    public void deleteById(Integer id) {
+        repository.deleteById(id);
     }
 }
 

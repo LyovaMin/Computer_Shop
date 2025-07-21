@@ -23,7 +23,7 @@ public class ProductRestController {
 
     @GetMapping
     public List<ProductDTO> findAll(ProductFilter filter) {
-        return null;
+        return productService.findAll().stream().map(ProductMapper::toDTO).toList();
     }
 
     @GetMapping("/{name}")

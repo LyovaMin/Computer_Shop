@@ -2,9 +2,11 @@ package by.lyofchik.AppSpring.Configuration;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 
@@ -15,10 +17,11 @@ import java.util.concurrent.*;
 @EnableAspectJAutoProxy
 public class ExecutorServiceConfig implements AsyncConfigurer{
     @Bean
+    @Scope("prototype")
     ExecutorService executor() {
         return new ThreadPoolExecutor(
-                20,
-                20,
+                5,
+                10,
                 10L, TimeUnit.SECONDS,
                 new LinkedBlockingQueue<>(40), // возможная очередь потоков
                 new ThreadPoolExecutor.CallerRunsPolicy() // Политика при переполнении

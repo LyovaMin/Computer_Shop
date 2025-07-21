@@ -2,6 +2,7 @@ package by.lyofchik.AppSpring.Model.Entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.BatchSize;
 
 @Data
 @Entity
@@ -18,6 +19,7 @@ public class Product {
     @Column(name = "price", nullable = false)
     private Integer price;
 
+    //@BatchSize(size = 10)
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "categoryid", nullable = false)
     private Category category;

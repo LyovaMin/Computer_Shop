@@ -35,6 +35,10 @@
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
 			<version>3.2.4</version>
@@ -119,6 +123,21 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+			<version>11.10.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-sqlserver</artifactId>
+			<version>11.10.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.ben-manes.caffeine</groupId>
+			<artifactId>caffeine</artifactId>
+			<version>3.2.2</version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -133,41 +152,41 @@
 		</dependencies>
 	</dependencyManagement>
 
-	<build>
-		<plugins>
-			<!--Generate Java Pojo and Q Classes from the Database-->
-			<plugin>
-				<groupId>com.querydsl</groupId>
-				<artifactId>querydsl-maven-plugin</artifactId>
-				<version>${querydsl.version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>export</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<jdbcDriver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbcDriver>
-					<jdbcUrl>jdbc:sqlserver://localhost:1433;database=ComputerShop;integratedSecurity=true;trustServerCertificate=true</jdbcUrl>
-					<exportBeans>true</exportBeans>
-					<packageName>by.lyofchik.AppSpring</packageName>
-					<exportAll>true</exportAll>
-					<columnAnnotations>true</columnAnnotations>
-					<exportForeignKeys>false</exportForeignKeys>
-					<beanAddToString>true</beanAddToString>
-					<targetFolder>${project.build.directory}/generated-sources/java</targetFolder>
-					<sourceFolder>${project.build.directory}/generated-sources/java</sourceFolder>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>com.oracle</groupId>
-						<artifactId>ojdbc7</artifactId>
-						<version>12.1.0.1</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-		</plugins>
-	</build>
+<!--	<build>-->
+<!--		<plugins>-->
+<!--			&lt;!&ndash;Generate Java Pojo and Q Classes from the Database&ndash;&gt;-->
+<!--			<plugin>-->
+<!--				<groupId>com.querydsl</groupId>-->
+<!--				<artifactId>querydsl-maven-plugin</artifactId>-->
+<!--				<version>${querydsl.version}</version>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<goals>-->
+<!--							<goal>export</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--				<configuration>-->
+<!--					<jdbcDriver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbcDriver>-->
+<!--					<jdbcUrl>jdbc:sqlserver://localhost:1433;database=ComputerShop;integratedSecurity=true;trustServerCertificate=true</jdbcUrl>-->
+<!--					<exportBeans>true</exportBeans>-->
+<!--					<packageName>by.lyofchik.AppSpring</packageName>-->
+<!--					<exportAll>true</exportAll>-->
+<!--					<columnAnnotations>true</columnAnnotations>-->
+<!--					<exportForeignKeys>false</exportForeignKeys>-->
+<!--					<beanAddToString>true</beanAddToString>-->
+<!--					<targetFolder>${project.build.directory}/generated-sources/java</targetFolder>-->
+<!--					<sourceFolder>${project.build.directory}/generated-sources/java</sourceFolder>-->
+<!--				</configuration>-->
+<!--				<dependencies>-->
+<!--					<dependency>-->
+<!--						<groupId>com.oracle</groupId>-->
+<!--						<artifactId>ojdbc7</artifactId>-->
+<!--						<version>12.1.0.1</version>-->
+<!--					</dependency>-->
+<!--				</dependencies>-->
+<!--			</plugin>-->
+<!--		</plugins>-->
+<!--	</build>-->
 
 </project>

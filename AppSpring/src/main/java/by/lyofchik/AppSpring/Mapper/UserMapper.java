@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class UserMapper {
-    private final ModelMapper mapper;
+    private static ModelMapper mapper;
 
     public User toUser(RegistrationDTO registrationDTO){
         return User.builder()
@@ -25,7 +25,7 @@ public class UserMapper {
                 .build();
     }
 
-    public UserResponseDTO toResponseDTO(User user){
+    public static UserResponseDTO toResponseDTO(User user){
         return mapper.map(user, UserResponseDTO.class);
     }
 }

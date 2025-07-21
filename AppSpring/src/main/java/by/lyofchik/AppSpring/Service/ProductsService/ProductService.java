@@ -1,20 +1,20 @@
 package by.lyofchik.AppSpring.Service.ProductsService;
 
 import by.lyofchik.AppSpring.Filter.ProductFilter;
-import by.lyofchik.AppSpring.Mapper.ProductMapper;
-import by.lyofchik.AppSpring.Model.DTO.ProductDTO;
 import by.lyofchik.AppSpring.Model.DTO.QPredicate;
 import by.lyofchik.AppSpring.Model.Entities.Product;
 import by.lyofchik.AppSpring.Repository.ProductRepository;
 import by.lyofchik.AppSpring.Service.EntityInterfaces.*;
-import com.querydsl.jpa.impl.JPAQuery;
 import jakarta.persistence.EntityManager;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.concurrent.TimeUnit;
 
 import static by.lyofchik.AppSpring.Model.QEntities.QProduct.product;
 
@@ -47,19 +47,16 @@ public class ProductService implements
         return repository.save(entity);
     }
 
-    @Override
-    public List<Product> findAllByFilter(ProductFilter filter) {
+    @Cacheable("products")
+    public Page<Product> findAll(ProductFilter filter, Pageable pageable) {
         var predicates = QPredicate.builder()
                 .add(filter.productName(), product.productName::containsIgnoreCase)
                 .add(filter.price(), product.price::lt)
                 .add(filter.categoryName(), product.category.categoryName::containsIgnoreCase)
                 .build();
 
-        return new JPAQuery<Product>(entityManager)
-                .select(product)
-                .from(product)
-                .where(predicates)
-                .fetch();
+        //TimeUnit.SECONDS.sleep(10);
+        return repository.findAll(predicates, pageable);
     }
 
     @Override
@@ -86,5 +83,10 @@ public class ProductService implements
 
     public Product findById(int id) {
         return repository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public List<Product> findAllByFilter(ProductFilter filter) {
+        return List.of();
     }
 }

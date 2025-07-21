@@ -1,6 +1,7 @@
 package by.lyofchik.AppSpring.Controller.Web;
 
 import by.lyofchik.AppSpring.Filter.ProductFilter;
+import by.lyofchik.AppSpring.Model.DTO.PageResponse;
 import by.lyofchik.AppSpring.Model.Entities.Product;
 import by.lyofchik.AppSpring.Model.Entities.Role;
 import by.lyofchik.AppSpring.Model.Entities.Sale;
@@ -16,6 +17,8 @@ import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,10 +42,15 @@ public class ShopController {
     List<Product> productsCart;
 
     @GetMapping
-    public String shop(Model model, Authentication authentication, ProductFilter filter) {
-        model.addAttribute("products", productService.findAllByFilter(filter));
-        User user = userService.find(authentication.getName()).orElseThrow();
+    public String shop(Model model,
+                       Authentication authentication,
+                       ProductFilter filter,
+                       Pageable pageable) {
+        Page<Product> page = productService.findAll(filter, pageable);
+        model.addAttribute("products", PageResponse.of(page));
+
         model.addAttribute("user", authentication);
+        model.addAttribute("filter", filter);
 
         log.info("user logged in {}", authentication);
         return "shopPages/shopMain";
@@ -60,7 +68,8 @@ public class ShopController {
     }
 
     @PostMapping("/buy")
-    public String buy(@RequestParam String productName, Model model) {
+    public String buy(@RequestParam String productName,
+                      Model model) {
         String authName = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.find(authName).orElseThrow();
         Product product = productService.find(productName).orElseThrow();
@@ -71,7 +80,7 @@ public class ShopController {
                 .saleDate(LocalDate.now())
                 .build());
         model.addAttribute("product", product);
-        return "shopPages/Hello";
+        return "redirect:/shop";
     }
 
     @PostMapping("/cart/add/{productName}")

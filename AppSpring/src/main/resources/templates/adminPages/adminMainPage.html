@@ -10,19 +10,20 @@
     <a th:href="@{/shop}">Страница магазина</a>
 </div>
 <br/>
-<form th:action="@{/admin/send}" method="post" enctype="multipart/form-data">
+<!--/*@thymesVar id="emailRequest" type="by.lyofchik.AppSpring.Model.DTO.EmailRequest"*/-->
+<form th:action="@{/admin/send}" method="post" enctype="multipart/form-data" th:object="${emailRequest}">
     Отправить сообщение
     <br/>
     <label for="email">Почта
-        <input id="email" type="text" name="email" required>
+        <input id="email" type="text" name="email" th:field="*{email}">
     </label>
     <br/>
     <label for="message">Сообщение
-        <input id="message" type="text" name="message" required>
+        <input id="message" type="text" name="message" th:field="*{message}">
     </label>
     <br/>
     <label for="document">Выберите фото
-        <input id="document" type="file" name="document" accept="image/*">
+        <input id="document" type="file" name="document" accept="image/*" th:field="*{document}">
     </label>
     <br/>
     <button type="submit">Отправить</button>

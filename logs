@@ -4291,3 +4291,60 @@ java.lang.IllegalArgumentException: SimpleMessageConverter only supports String,
 15:36:39.542  INFO 4720 --- [AppSpring] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 15:36:39.560  INFO 4720 --- [AppSpring] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 15:36:39.569  INFO 4720 --- [AppSpring] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+15:38:02.024  INFO 7904 --- [AppSpring] [main] b.l.AppSpring.AppSpringApplication       : Starting AppSpringApplication using Java 24.0.1 with PID 7904 (C:\Users\rebik\Downloads\AppSpring\AppSpring\target\classes started by rebik in C:\Users\rebik\Downloads\AppSpring)
+15:38:02.027  INFO 7904 --- [AppSpring] [main] b.l.AppSpring.AppSpringApplication       : No active profile set, falling back to 1 default profile: "default"
+15:38:03.787  INFO 7904 --- [AppSpring] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+15:38:03.882  INFO 7904 --- [AppSpring] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 82 ms. Found 3 JPA repository interfaces.
+15:38:04.151  INFO 7904 --- [AppSpring] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=7ae5b1da-0e5c-3929-993a-288730ec6134
+15:38:04.765  INFO 7904 --- [AppSpring] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+15:38:04.787  INFO 7904 --- [AppSpring] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+15:38:04.787  INFO 7904 --- [AppSpring] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
+15:38:04.861  INFO 7904 --- [AppSpring] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+15:38:04.861  INFO 7904 --- [AppSpring] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2760 ms
+15:38:05.268  INFO 7904 --- [AppSpring] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+15:38:05.357  INFO 7904 --- [AppSpring] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.18.Final
+15:38:05.405  INFO 7904 --- [AppSpring] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+15:38:05.739  INFO 7904 --- [AppSpring] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+15:38:05.781  INFO 7904 --- [AppSpring] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+15:38:06.435  INFO 7904 --- [AppSpring] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection ConnectionID:1 ClientConnectionId: 9b02cded-3606-45c2-bd0a-8a270c6bd920
+15:38:06.438  INFO 7904 --- [AppSpring] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+15:39:18.534  WARN 7904 --- [AppSpring] [main] org.hibernate.orm.deprecation            : HHH90000025: SQLServerDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+15:39:18.557  INFO 7904 --- [AppSpring] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+15:39:19.676  INFO 7904 --- [AppSpring] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+15:39:19.680  INFO 7904 --- [AppSpring] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+15:39:19.921  INFO 7904 --- [AppSpring] [main] by.lyofchik.AppSpring.AOP.MyAspect       : Конфигурация прошла успешно класс: TestServerFeignConfig$$SpringCGLIB$$0 Результат: FULL
+15:39:19.923  INFO 7904 --- [AppSpring] [main] by.lyofchik.AppSpring.AOP.MyAspect       : Конфигурация прошла успешно класс: TestServerFeignConfig$$SpringCGLIB$$0 Результат: feign.Request$Options@6e1d939e
+15:39:20.088  WARN 7904 --- [AppSpring] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+15:39:20.205  INFO 7904 --- [AppSpring] [main] by.lyofchik.AppSpring.AOP.MyAspect       : Конфигурация прошла успешно класс: ExecutorServiceConfig$$SpringCGLIB$$0 Результат: java.util.concurrent.ThreadPoolExecutor@7ef706b0[Running, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0]
+15:39:20.585  INFO 7904 --- [AppSpring] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+15:39:21.189  INFO 7904 --- [AppSpring] [main] by.lyofchik.AppSpring.AOP.MyAspect       : Конфигурация прошла успешно класс: RabbitMQConfig$$SpringCGLIB$$0 Результат: org.springframework.amqp.support.converter.Jackson2JsonMessageConverter@6a702361
+15:39:21.200  INFO 7904 --- [AppSpring] [main] by.lyofchik.AppSpring.AOP.MyAspect       : Конфигурация прошла успешно класс: RabbitMQConfig$$SpringCGLIB$$0 Результат: org.springframework.amqp.rabbit.core.RabbitTemplate@b54a7b9
+15:39:21.300  INFO 7904 --- [AppSpring] [main] by.lyofchik.AppSpring.AOP.MyAspect       : Конфигурация прошла успешно класс: RabbitMQConfig$$SpringCGLIB$$0 Результат: Queue [name=MyQueue, durable=false, autoDelete=false, exclusive=false, arguments={}, actualName=MyQueue]
+15:39:21.307  INFO 7904 --- [AppSpring] [main] by.lyofchik.AppSpring.AOP.MyAspect       : Конфигурация прошла успешно класс: RabbitMQConfig$$SpringCGLIB$$0 Результат: org.springframework.amqp.rabbit.core.RabbitAdmin@408ce324
+15:39:21.841  INFO 7904 --- [AppSpring] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 16 endpoints beneath base path '/actuator'
+15:39:21.896  INFO 7904 --- [AppSpring] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userService
+15:39:22.030  INFO 7904 --- [AppSpring] [main] by.lyofchik.AppSpring.AOP.MyAspect       : Конфигурация прошла успешно класс: SecurityConfig$$SpringCGLIB$$0 Результат: DefaultSecurityFilterChain matching [any request] and having filters [DisableEncodeUrl, WebAsyncManagerIntegration, SecurityContextHolder, HeaderWriter, Csrf, Logout, UsernamePasswordAuthentication, RequestCacheAware, SecurityContextHolderAwareRequest, AnonymousAuthentication, ExceptionTranslation, Authorization]
+15:39:22.053  INFO 7904 --- [AppSpring] [main] by.lyofchik.AppSpring.AOP.MyAspect       : Конфигурация прошла успешно класс: TestServerFeignConfig$$SpringCGLIB$$0 Результат: FULL
+15:39:22.054  INFO 7904 --- [AppSpring] [main] by.lyofchik.AppSpring.AOP.MyAspect       : Конфигурация прошла успешно класс: TestServerFeignConfig$$SpringCGLIB$$0 Результат: feign.Request$Options@53365a58
+15:39:24.263  INFO 7904 --- [AppSpring] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+15:39:24.282  INFO 7904 --- [AppSpring] [main] b.l.AppSpring.AppSpringApplication       : Started AppSpringApplication in 82.917 seconds (process running for 84.329)
+15:39:24.728  INFO 7904 --- [AppSpring] [RMI TCP Connection(3)-192.168.137.49] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+15:39:24.729  INFO 7904 --- [AppSpring] [RMI TCP Connection(3)-192.168.137.49] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+15:39:24.730  INFO 7904 --- [AppSpring] [RMI TCP Connection(4)-192.168.137.49] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [localhost:5672]
+15:39:24.733  INFO 7904 --- [AppSpring] [RMI TCP Connection(3)-192.168.137.49] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+15:39:24.810  INFO 7904 --- [AppSpring] [RMI TCP Connection(4)-192.168.137.49] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#1c4053aa:0/SimpleConnection@3c1ac1aa [delegate=amqp://guest@127.0.0.1:5672/, localPort=50258]
+15:39:24.817  INFO 7904 --- [AppSpring] [RMI TCP Connection(4)-192.168.137.49] o.s.amqp.rabbit.core.RabbitAdmin         : Auto-declaring a non-durable, auto-delete, or exclusive Queue (MyQueue) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost.
+15:39:35.714  INFO 7904 --- [AppSpring] [http-nio-8080-exec-2] b.l.A.C.Rest.RabbitRestController        : Sending2 message: АмудеТоп
+15:39:35.735  INFO 7904 --- [AppSpring] [http-nio-8080-exec-2] b.l.A.C.Rest.RabbitRestController        : Sent 2 message: АмудеТоп
+15:40:29.193  INFO 7904 --- [AppSpring] [http-nio-8080-exec-4] b.l.A.Controller.Web.LoginController     : login page opened
+15:40:41.641  INFO 7904 --- [AppSpring] [http-nio-8080-exec-8] b.l.A.C.Rest.RabbitRestController        : Sending2 message: АмудеТоп
+15:40:41.643  INFO 7904 --- [AppSpring] [http-nio-8080-exec-8] b.l.A.C.Rest.RabbitRestController        : Sent 2 message: АмудеТоп
+15:43:09.846  INFO 7904 --- [AppSpring] [http-nio-8080-exec-1] b.l.A.C.Rest.RabbitRestController        : Sending2 message: АмудеТоп
+15:43:09.847  INFO 7904 --- [AppSpring] [http-nio-8080-exec-1] b.l.A.C.Rest.RabbitRestController        : Sent 2 message: АмудеТоп

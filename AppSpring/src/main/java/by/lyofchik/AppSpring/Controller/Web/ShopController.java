@@ -2,6 +2,7 @@ package by.lyofchik.AppSpring.Controller.Web;
 
 import by.lyofchik.AppSpring.Filter.ProductFilter;
 import by.lyofchik.AppSpring.Model.DTO.PageResponse;
+import by.lyofchik.AppSpring.Model.DTO.ProductDTO;
 import by.lyofchik.AppSpring.Model.Entities.Product;
 import by.lyofchik.AppSpring.Model.Entities.Role;
 import by.lyofchik.AppSpring.Model.Entities.Sale;

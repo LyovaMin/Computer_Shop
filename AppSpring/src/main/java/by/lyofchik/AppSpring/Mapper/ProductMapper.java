@@ -6,14 +6,15 @@ import by.lyofchik.AppSpring.Model.Entities.Product;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class ProductMapper {
-    private static ModelMapper mapper;
+    private ModelMapper mapper;
 
-    public static ProductDTO toDTO(Product product) {
+    public ProductDTO toDTO(Product product) {
         return mapper.map(product, ProductDTO.class);
     }
 }

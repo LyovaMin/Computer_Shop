@@ -20,10 +20,11 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ProductRestController {
     ProductService productService;
+    ProductMapper productMapper;
 
     @GetMapping
     public List<ProductDTO> findAll(ProductFilter filter) {
-        return productService.findAll().stream().map(ProductMapper::toDTO).toList();
+        return productService.findAll().stream().map(productMapper::toDTO).toList();
     }
 
     @GetMapping("/{name}")

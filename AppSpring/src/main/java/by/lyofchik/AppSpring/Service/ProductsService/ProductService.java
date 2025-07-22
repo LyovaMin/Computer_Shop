@@ -1,12 +1,16 @@
 package by.lyofchik.AppSpring.Service.ProductsService;
 
 import by.lyofchik.AppSpring.Filter.ProductFilter;
+import by.lyofchik.AppSpring.Mapper.ProductMapper;
+import by.lyofchik.AppSpring.Model.DTO.ProductDTO;
 import by.lyofchik.AppSpring.Model.DTO.QPredicate;
 import by.lyofchik.AppSpring.Model.Entities.Product;
 import by.lyofchik.AppSpring.Repository.ProductRepository;
 import by.lyofchik.AppSpring.Service.EntityInterfaces.*;
 import jakarta.persistence.EntityManager;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,10 +33,11 @@ public class ProductService implements
         FindAllEntitiesByFilter<Product> {
 
     private final ProductRepository repository;
-    private final EntityManager entityManager;
+    private final ProductMapper mapper;
 
 
     @Override
+    @CachePut("products")
     public boolean delete(String name) {
         try {
             repository.deleteByName(name);
@@ -43,6 +48,7 @@ public class ProductService implements
     }
 
     @Override
+    @CachePut("products")
     public Product save(Product entity) {
         return repository.save(entity);
     }
@@ -55,7 +61,11 @@ public class ProductService implements
                 .add(filter.categoryName(), product.category.categoryName::containsIgnoreCase)
                 .build();
 
-        //TimeUnit.SECONDS.sleep(10);
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return repository.findAll(predicates, pageable);
     }
 
@@ -77,6 +87,7 @@ public class ProductService implements
         return repository.findByCategory_CategoryName(categoryName);
     }
 
+    @CachePut("products")
     public void delete(Product product) {
         repository.delete(product);
     }

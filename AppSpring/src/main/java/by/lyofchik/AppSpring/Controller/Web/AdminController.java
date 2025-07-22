@@ -1,7 +1,6 @@
 package by.lyofchik.AppSpring.Controller.Web;
 
 import by.lyofchik.AppSpring.Model.DTO.EmailRequest;
-import by.lyofchik.AppSpring.Model.Entities.Product;
 import by.lyofchik.AppSpring.Service.MailService.MailService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

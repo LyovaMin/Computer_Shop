@@ -18,12 +18,12 @@ public class EmailSenderRestController {
 
     @GetMapping
     public void sendEmail(@RequestParam String email, @RequestParam String message, @RequestParam byte[] data) {
-        var request = EmailRequest.builder()
-                .email(email)
-                .message(message)
-                //.document(data)
-                .build();
-        mailService.send(request);
+//        var request = EmailRequest.builder()
+//                .email(email)
+//                .message(message)
+//                //.document(data)
+//                .build();
+//        mailService.send(request);
     }
 
     @PostMapping

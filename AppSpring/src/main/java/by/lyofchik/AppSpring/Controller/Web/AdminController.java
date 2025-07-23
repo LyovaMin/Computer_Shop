@@ -4,6 +4,7 @@ import by.lyofchik.AppSpring.Model.DTO.EmailRequest;
 import by.lyofchik.AppSpring.Service.MailService.MailService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,7 +26,7 @@ public class AdminController {
 
     @GetMapping
     public String admin(Model model,
-                        @ModelAttribute EmailRequest emailRequest) {
+                        @Nullable @ModelAttribute EmailRequest emailRequest) {
         model.addAttribute("emailRequest", emailRequest);
         return "adminPages/adminMainPage";
     }

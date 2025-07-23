@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FileNotEmpty {
-    String message() default "Product is empty";
+    String message() default "File is empty";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

@@ -2,14 +2,11 @@ package by.lyofchik.AppSpring.Service.ProductsService;
 
 import by.lyofchik.AppSpring.Filter.ProductFilter;
 import by.lyofchik.AppSpring.Mapper.ProductMapper;
-import by.lyofchik.AppSpring.Model.DTO.ProductDTO;
 import by.lyofchik.AppSpring.Model.DTO.QPredicate;
 import by.lyofchik.AppSpring.Model.Entities.Product;
 import by.lyofchik.AppSpring.Repository.ProductRepository;
 import by.lyofchik.AppSpring.Service.EntityInterfaces.*;
-import jakarta.persistence.EntityManager;
 import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -62,7 +59,7 @@ public class ProductService implements
                 .build();
 
         try {
-            TimeUnit.SECONDS.sleep(1);
+            TimeUnit.SECONDS.sleep(0);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

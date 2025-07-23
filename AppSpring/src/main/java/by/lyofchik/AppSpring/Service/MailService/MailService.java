@@ -30,11 +30,11 @@ public class MailService {
             helper.setTo(emailRequest.getEmail());
             helper.setSubject("Привет");
             helper.setText(emailRequest.getMessage());
-            ByteArrayResource resource = new ByteArrayResource(emailRequest.getDocument().getBytes());
+            ByteArrayResource resource = new ByteArrayResource(emailRequest.getDocument());
             helper.addAttachment("meow.jpg", resource, "image/jpeg");
 
             mailSender.send(message);
-        } catch (MessagingException | IOException e) {
+        } catch (MessagingException e) {
             log.error("\n=========================\n {}",e.getMessage(), e);
         }
     }

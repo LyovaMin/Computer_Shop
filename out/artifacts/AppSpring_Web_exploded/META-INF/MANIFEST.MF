@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: rebik
+Build-Jdk: Oracle OpenJDK 24.0.1
+Implementation-Title: AppSpring
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: by.lyofchik
+Main-Class: ${start-class}
+

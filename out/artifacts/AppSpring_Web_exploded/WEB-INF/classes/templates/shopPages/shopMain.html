@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Shop</title>
+</head>
+<body>
+    <div sec:authorize="hasAuthority('ADMIN')">
+        <a th:href="@{/admin}">Перейти на страницу админа</a>
+    </div>
+    <form action="/shop">
+        <label for="productName">Название:
+            <input id="productName" type="text" name="productName" th:value="${filter.productName}">
+        </label>
+        <label for="price">Цена:
+            <input id="price" type="number" name="price" th:value="${filter.price}">
+        </label>
+        <label for="categoryName">
+            <select id="categoryName" name="categoryName">
+                <option value="">Все товары</option>
+                <option th:value="'Видеокарты'" th:selected="${filter.categoryName == 'Видеокарты'}">Видеокарты</option>
+                <option th:value="'Жесткие Диски'" th:selected="${filter.categoryName == 'Жесткие Диски'}">Жесткие Диски</option>
+                <option th:value="'Мониторы'" th:selected="${filter.categoryName == 'Мониторы'}">Мониторы</option>
+                <option th:value="'Наушники'" th:selected="${filter.categoryName == 'Наушники'}">Наушники</option>
+                <option th:value="'Ноутбуки'" th:selected="${filter.categoryName == 'Ноутбуки'}">Ноутбуки</option>
+                <option th:value="'Процессоры'" th:selected="${filter.categoryName == 'Процессоры'}">Процессоры</option>
+            </select>
+        </label>
+        <div>
+            <label for="page">Страница
+                <input id="page" type="number" name="page" th:value="${products.metaData.page}">
+            </label>
+            <label for="size">Размер страницы
+                <select id="size" name="size" th:value="${products.metaData.size}">
+                    <option>10</option>
+                    <option>20</option>
+                    <option>30</option>
+                </select>
+            </label>
+        </div>
+        <button type="submit">Поиск</button>
+    </form>
+    <div th:insert="~{fragment::header}"></div>
+    <form th:action="@{/shop/cart}" method="get">
+        <button type="submit">Корзина</button>
+    </form>
+    <br/>
+    <br/>
+    <tr th:each="product : ${products.list}">
+        <td th:text="${product.productName}">name</td>
+        <td th:text="Цена"></td>
+        <td th:text="${product.price}">price</td>
+        <td th:text="Рублей">rubles</td>
+        <td>
+            <form th:action="@{/shop/buy}" method="post">
+                <input type="hidden" name="name" th:value="${product.productName}" />
+                <button type="submit">Купить</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/shop/cart/add/{name}(name=${product.productName})}" method="post">
+                <button type="submit">Добавить в корзину</button>
+            </form>
+        </td>
+    </tr>
+</body>
+</html>

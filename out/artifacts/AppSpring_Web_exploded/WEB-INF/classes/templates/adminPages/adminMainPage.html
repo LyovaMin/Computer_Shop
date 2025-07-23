@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+</head>
+<body>
+<h1>Админ</h1>
+<div>
+    <a th:href="@{/shop}">Страница магазина</a>
+</div>
+<br/>
+<!--/*@thymesVar id="emailRequest" type="by.lyofchik.AppSpring.Model.DTO.EmailRequest"*/-->
+<form th:action="@{/admin/send}" method="post" enctype="multipart/form-data" th:object="${emailRequest}">
+    Отправить сообщение
+    <br/>
+    <label for="email">Почта
+        <input id="email" type="text" name="email" th:field="*{email}">
+    </label>
+    <br/>
+    <label for="message">Сообщение
+        <input id="message" type="text" name="message" th:field="*{message}">
+    </label>
+    <br/>
+    <label for="document">Выберите фото
+        <input id="document" type="file" name="document" accept="image/*" th:field="*{document}">
+    </label>
+    <br/>
+    <button type="submit">Отправить</button>
+    <div th:if="${errors}">
+        <p style="color: crimson" th:each="error : ${errors}" th:text="${error.getDefaultMessage}"> </p>
+    </div>
+</form>
+</body>
+</html>

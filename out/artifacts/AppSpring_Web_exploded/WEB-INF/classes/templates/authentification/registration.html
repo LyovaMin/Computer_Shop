@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration</title>
+</head>
+<h1>Регистрация</h1>
+<body>
+    <!--/*@thymesVar id="registrationDTO" type="by.lyofchik.AppSpring.Model.DTO.RegistrationDTO"*/-->
+    <form th:action="@{/registration}" method="post" th:object="${registrationDTO}">
+      <label>Логин
+        <input type="text" name="userName" th:value="*{userName}">
+      </label>
+        <br/>
+      <label>Пароль
+        <input type="text" name="password" th:value="*{password}">
+      </label>
+      <button type="submit">Зарегистрироваться</button>
+    </form>
+    <div th:if="${errors}">
+        <p style="color: crimson" th:each="error : ${errors}" th:text="${error.getDefaultMessage}"> </p>
+    </div>
+</body>
+</html>

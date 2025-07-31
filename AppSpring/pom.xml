@@ -14,7 +14,7 @@
 	<name>AppSpring</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>24</java.version>
+		<java.version>21</java.version>
 	</properties>
 
 	<dependencies>
@@ -100,11 +100,6 @@
 
 		<dependency>
 			<groupId>com.querydsl</groupId>
-			<artifactId>querydsl-apt</artifactId>
-			<version>5.1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.querydsl</groupId>
 			<artifactId>querydsl-codegen</artifactId>
 			<version>5.1.0</version>
 		</dependency>
@@ -155,6 +150,24 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>3.5.3</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
 
 <!--	<build>-->
 <!--		<plugins>-->

@@ -1,5 +1,5 @@
-FROM openjdk:24-jdk
+FROM openjdk:21-jdk
 LABEL authors="lyovik"
 WORKDIR /app
-COPY /out/artifacts/AppSpring/AppSpring.jar /app/ComputerShop.jar
+COPY target/AppSpring-0.0.1-SNAPSHOT.jar /app/ComputerShop.jar
 ENTRYPOINT ["java", "-jar", "ComputerShop.jar"]

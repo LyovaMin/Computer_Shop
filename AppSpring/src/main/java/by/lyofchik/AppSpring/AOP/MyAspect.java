@@ -17,7 +17,7 @@ public class MyAspect {
     public void isBean() {
     }
 
-    @AfterReturning(pointcut = "isConfigurationLayer() && isBean())",
+    @AfterReturning(pointcut = "isConfigurationLayer() && isBean()",
     returning = "result")
     public void doAfterReturning(JoinPoint joinPoint, Object result) {
         log.info("Конфигурация прошла успешно класс: {} Результат: {}",

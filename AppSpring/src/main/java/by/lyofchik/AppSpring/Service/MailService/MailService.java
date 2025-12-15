@@ -6,12 +6,10 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
+import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @Service
@@ -30,7 +28,7 @@ public class MailService {
             helper.setTo(emailRequest.getEmail());
             helper.setSubject("Привет");
             helper.setText(emailRequest.getMessage());
-            ByteArrayResource resource = new ByteArrayResource(emailRequest.getDocument());
+            MultipartFile resource = emailRequest.getDocument();
             helper.addAttachment("meow.jpg", resource, "image/jpeg");
 
             mailSender.send(message);

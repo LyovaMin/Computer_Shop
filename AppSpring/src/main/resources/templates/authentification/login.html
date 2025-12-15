@@ -2,22 +2,134 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Вход в Систему</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Общие стили и сброс */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5; /* Светло-серый фон */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        /* Контейнер формы */
+        .login-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Мягкая тень */
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #1a73e8; /* Синий цвет для заголовка */
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        /* Стиль для основной формы логина */
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Расстояние между элементами формы */
+            margin-bottom: 25px;
+        }
+
+        label {
+            text-align: left;
+            display: block;
+            font-weight: 400;
+            font-size: 14px;
+        }
+
+        /* Стили полей ввода */
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box; /* Важно для корректного padding */
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #1a73e8; /* Подсветка при фокусе */
+            outline: none;
+        }
+
+        /* Стили кнопок */
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+
+        /* Стиль кнопки "Enter" (основная) */
+        .submit-button {
+            background-color: #1a73e8;
+            color: white;
+
+        }
+
+        .submit-button:hover {
+            background-color: #155cb0;
+        }
+
+        /* Стиль кнопки "Registration" (вторичная) */
+        .registration-button {
+            background-color: #e0e0e0;
+            color: #333;
+            margin-top: 5px; /* Небольшой отступ от основной кнопки */
+        }
+
+        .registration-button:hover {
+            background-color: #c9c9c9;
+        }
+
+        button:active {
+            transform: scale(0.99);
+        }
+    </style>
 </head>
 <body>
-<h1>Логин</h1>
-<form th:action="@{/login}" method="post">
-    <label for="username">Login:
-        <input id="username" type="text" name="username" th:value="*{username}">
-    </label>
-    <br/>
-    <label for="password">Password:
-        <input id="password" type="password" name="password" th:value="*{password}">
-    </label>
-    <button type="submit">Enter</button>
-</form>
-<form th:action="@{/registration}">
-    <button type="submit">Registration</button>
-</form>
+
+<div class="login-container">
+    <h1>Вход в Систему</h1>
+
+    <form th:action="@{/login}" method="post" class="login-form">
+        <label for="username">Логин:
+            <input id="username" type="text" name="username" th:value="*{username}" placeholder="Введите ваш логин">
+        </label>
+
+        <label for="password">Пароль:
+            <input id="password" type="password" name="password" th:value="*{password}" placeholder="Введите ваш пароль">
+        </label>
+
+        <button type="submit" class="submit-button">Войти</button>
+    </form>
+
+    <form th:action="@{/registration}">
+        <button type="submit" class="registration-button">Регистрация</button>
+    </form>
+</div>
+
 </body>
 </html>

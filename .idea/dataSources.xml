@@ -13,7 +13,19 @@
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="sqlserver@localhost" uuid="ffd4a51e-be8d-4196-8652-32e68ca970f7">
+    <data-source source="LOCAL" name="Logistic" uuid="d2f24ca7-d410-4e6d-acbb-d0ce24d99ae9">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
+      <jdbc-additional-properties>
+        <property name="com.intellij.clouds.kubernetes.db.host.port" />
+        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
+        <property name="com.intellij.clouds.kubernetes.db.container.port" />
+      </jdbc-additional-properties>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="sqlserver@localhost" uuid="bc6410b4-8b54-4334-8a0e-79e39789eea7">
       <driver-ref>sqlserver.ms</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>

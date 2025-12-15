@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.StringWriter;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -74,14 +75,20 @@ public class ShopController {
         String authName = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.find(authName).orElseThrow();
         Product product = productService.find(productName).orElseThrow();
+        List<Product> purchasedProducts = new ArrayList<>();
+        purchasedProducts.add(product);
+        double totalAmount = product.getPrice();
 
         saleService.save(Sale.builder()
                 .product(product)
                 .user(user)
                 .saleDate(LocalDate.now())
                 .build());
-        model.addAttribute("product", product);
-        return "redirect:/shop";
+
+        model.addAttribute("purchasedProducts", purchasedProducts);
+        model.addAttribute("user", user);
+        model.addAttribute("totalAmount", totalAmount);
+        return "shopPages/Checkout";
     }
 
     @PostMapping("/cart/add/{productName}")
@@ -91,9 +98,13 @@ public class ShopController {
     }
 
     @PostMapping("/cart/buyAll")
-    public String cartBuyAll() {
+    public String cartBuyAll(Model model) {
         String authName = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.find(authName).orElseThrow();
+        List<Product> purchasedProducts = new ArrayList<>(productsCart);
+        double totalAmount = purchasedProducts.stream()
+                .mapToDouble(Product::getPrice)
+                .sum();
 
         for (Product product : productsCart) {
             saleService.save(
@@ -105,7 +116,11 @@ public class ShopController {
             );
         }
         productsCart.clear();
-        return "shopPages/Hello";
+
+        model.addAttribute("purchasedProducts", purchasedProducts);
+        model.addAttribute("user", user);
+        model.addAttribute("totalAmount", totalAmount);
+        return "shopPages/Checkout";
     }
 
     @Transactional

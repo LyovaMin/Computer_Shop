@@ -50,7 +50,7 @@ public class ProductService implements
         return repository.save(entity);
     }
 
-    @Cacheable("products")
+    @Cacheable(value = "products")
     public Page<Product> findAll(ProductFilter filter, Pageable pageable) {
         var predicates = QPredicate.builder()
                 .add(filter.productName(), product.productName::containsIgnoreCase)

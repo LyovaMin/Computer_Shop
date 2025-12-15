@@ -16,3 +16,6 @@ from category
 join dbo.products p on category.CategoryId = p.CategoryId
 group by CategoryName
 having avg(Price) > 300;
+
+
+

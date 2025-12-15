@@ -1,0 +1,320 @@
+/* ================================================= */
+/* 1. Общие стили и контейнер */
+/* ================================================= */
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f4f7f6; /* Мягкий фон */
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Главная тень */
+}
+
+h1 {
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+/* ================================================= */
+/* 2. Навигация (Top-Nav) */
+/* ================================================= */
+
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Единый стиль для навигационных кнопок (Админ, Корзина) */
+.top-nav .admin-link a,
+.cart-button button {
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.top-nav .admin-link a:hover,
+.cart-button button:hover {
+    background-color: #2980b9;
+}
+
+/* ================================================= */
+/* 3. Панель фильтров */
+/* ================================================= */
+
+.filter-panel {
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-end; /* Важно: выравнивание всех элементов по нижнему краю */
+    justify-content: space-between;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+    align-self: flex-end; /* Гарантируем выравнивание по нижнему краю */
+}
+
+.filter-group label {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+    line-height: 1.2;
+}
+
+/* === КРАСИВЫЕ СТИЛИ ДЛЯ INPUT И SELECT (с фикс. высотой) === */
+.filter-panel input,
+.filter-panel select,
+.styled-select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Скругление */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06); /* Внутренняя тень */
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: white;
+
+    /* Фиксированная высота для выравнивания */
+    height: 40px;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+/* Эффект фокуса */
+.filter-panel input:focus,
+.filter-panel select:focus,
+.styled-select:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+}
+
+/* Скрываем стрелки для input type="number" */
+.filter-panel input[type="number"] {
+    -moz-appearance: textfield;
+}
+.filter-panel input[type="number"]::-webkit-outer-spin-button,
+.filter-panel input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+/* === СТИЛИЗАЦИЯ КНОПКИ "ПРИМЕНИТЬ ФИЛЬТРЫ" === */
+
+.filter-panel button[type="submit"] {
+    padding: 10px 25px;
+    background-color: #2ecc71; /* Ярко-зеленый цвет */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.1s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    /* Фиксированная высота для выравнивания */
+    height: 40px;
+    line-height: 18px;
+    box-sizing: border-box;
+    margin-top: 5px; /* Небольшой отступ, если flex-end не срабатывает идеально */
+}
+
+.filter-panel button[type="submit"]:hover {
+    background-color: #27ae60;
+}
+
+.filter-panel button[type="submit"]:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Скрытие лейбла для выравнивания кнопки */
+.submit-button-wrapper label {
+    visibility: hidden;
+    height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ================================================= */
+/* 4. Пагинация (Кнопки страниц) */
+/* ================================================= */
+
+.page-navigation-controls-wrapper {
+    /* Оборачивающий div для выравнивания в filter-panel */
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+}
+.page-navigation-controls-wrapper label {
+    visibility: hidden; /* Скрываем лейбл */
+    height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.page-navigation-controls {
+    display: flex;
+    align-items: center;
+    gap: 0; /* Убираем пробел между кнопками */
+
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+    height: 40px; /* Фиксированная высота */
+    box-sizing: border-box;
+    overflow: hidden; /* Чтобы скругление работало */
+}
+
+/* Стиль для кнопок "Предыдущая" / "Следующая" */
+.pagination-button {
+    text-decoration: none;
+    padding: 8px 12px;
+    border: none;
+    background-color: #3498db;
+    color: white;
+    border-radius: 0;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    line-height: 18px;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.pagination-button:hover {
+    background-color: #2980b9;
+}
+
+/* Скругление углов для крайних кнопок */
+.page-navigation-controls .pagination-button:first-child {
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+.page-navigation-controls .pagination-button:last-child {
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+/* Отображение номера страницы */
+.page-number-display {
+    font-weight: 700;
+    font-size: 1.1em;
+    color: #2c3e50;
+    padding: 0 10px;
+    line-height: 40px; /* Выравнивание по центру по вертикали */
+}
+
+/* Выбор размера страницы */
+.page-size-select {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 10px;
+}
+
+
+/* ================================================= */
+/* 5. Товары (Product Grid) */
+/* ================================================= */
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.product-card {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.product-name {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.product-price {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #e74c3c;
+    margin-bottom: 15px;
+}
+
+/* ================================================= */
+/* 6. Кнопки товаров (Buy/Cart) */
+/* ================================================= */
+
+.product-actions form {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.buy-button,
+.add-to-cart-button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.buy-button {
+    background-color: #f39c12;
+}
+.buy-button:hover {
+    background-color: #e67e22;
+}
+
+.add-to-cart-button {
+    background-color: #3498db;
+}
+.add-to-cart-button:hover {
+    background-color: #2980b9;
+}

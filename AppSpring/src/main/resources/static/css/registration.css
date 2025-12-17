@@ -1,0 +1,115 @@
+/* Общие настройки фона и центрирования */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: #333;
+}
+
+/* Контейнер карточки регистрации */
+.registration-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h1 {
+    color: #1a73e8; /* Тот же синий, что и при логине */
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+/* Настройки формы */
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+label {
+    text-align: left;
+    display: block;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+/* Поля ввода */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: #1a73e8;
+    outline: none;
+}
+
+/* Кнопка регистрации */
+.submit-button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #28a745; /* Зеленый цвет для создания аккаунта */
+    color: white;
+    font-weight: 500;
+    transition: background-color 0.3s, transform 0.1s;
+    margin-top: 10px;
+}
+
+.submit-button:hover {
+    background-color: #218838;
+}
+
+.submit-button:active {
+    transform: scale(0.98);
+}
+
+/* Блок ошибок */
+.error-container {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #fff5f5;
+    border-radius: 8px;
+    border: 1px solid #feb2b2;
+}
+
+.error-message {
+    color: #c53030;
+    font-size: 13px;
+    margin: 5px 0;
+}
+
+/* Ссылка на вход */
+.footer-link {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.footer-link a {
+    color: #1a73e8;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.footer-link a:hover {
+    text-decoration: underline;
+}

@@ -55,7 +55,7 @@ public class ShopController {
         model.addAttribute("filter", filter);
 
         log.info("user logged in {}", authentication);
-        return "shopPages/shopMain";
+        return "shop/shopMain";
     }
 
     @GetMapping("/admin")
@@ -66,7 +66,7 @@ public class ShopController {
     @GetMapping("/cart")
     public String shopCart(Model model) {
         model.addAttribute("products", productsCart);
-        return "shopPages/Cart";
+        return "shop/Cart";
     }
 
     @PostMapping("/buy")
@@ -88,7 +88,7 @@ public class ShopController {
         model.addAttribute("purchasedProducts", purchasedProducts);
         model.addAttribute("user", user);
         model.addAttribute("totalAmount", totalAmount);
-        return "shopPages/Checkout";
+        return "shop/Checkout";
     }
 
     @PostMapping("/cart/add/{productName}")
@@ -120,7 +120,7 @@ public class ShopController {
         model.addAttribute("purchasedProducts", purchasedProducts);
         model.addAttribute("user", user);
         model.addAttribute("totalAmount", totalAmount);
-        return "shopPages/Checkout";
+        return "shop/Checkout";
     }
 
     @Transactional

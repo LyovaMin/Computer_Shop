@@ -1,6 +1,7 @@
 package by.lyofchik.AppSpring.Model.Entities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.BatchSize;
 

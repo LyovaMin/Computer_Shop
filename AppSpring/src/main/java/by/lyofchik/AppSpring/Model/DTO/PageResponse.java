@@ -10,8 +10,6 @@ public record PageResponse<T>(List<T> list, by.lyofchik.AppSpring.Model.DTO.Page
         var metadata = new MetaData(page.getNumber(), page.getSize(), page.getTotalPages());
         return new PageResponse<>(page.getContent(), metadata);
     }
-
         public record MetaData(int page, int size, int totalPages) {
     }
-
 }

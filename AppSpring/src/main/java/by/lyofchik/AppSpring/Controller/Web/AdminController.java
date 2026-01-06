@@ -4,7 +4,7 @@ import by.lyofchik.AppSpring.Model.DTO.EmailRequest;
 import by.lyofchik.AppSpring.Model.Entities.Category;
 import by.lyofchik.AppSpring.Model.Entities.Product;
 import by.lyofchik.AppSpring.Service.CategoryService.CategoryService;
-import by.lyofchik.AppSpring.Service.MailService.MailService;
+import by.lyofchik.AppSpring.Service.Mail.MailService;
 import by.lyofchik.AppSpring.Service.ProductsService.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,8 +15,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.Arrays;
 
 @Slf4j
 @Controller
@@ -34,7 +32,7 @@ public class AdminController {
         return "admin/adminMainPage";
     }
 
-    @PostMapping("/send")
+    @PostMapping("mail/send")
     public String adminPost(@Validated @ModelAttribute EmailRequest emailRequest,
                             BindingResult bindingResult,
                             RedirectAttributes redirectAttributes){

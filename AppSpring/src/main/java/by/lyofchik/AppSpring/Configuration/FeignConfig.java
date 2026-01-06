@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 @Configuration
 @EnableAspectJAutoProxy
-public class TestServerFeignConfig implements FeignClientConfigurer {
+public class FeignConfig implements FeignClientConfigurer {
     @Bean
     public Logger.Level feignLoggerLevel() {
         return Logger.Level.FULL;

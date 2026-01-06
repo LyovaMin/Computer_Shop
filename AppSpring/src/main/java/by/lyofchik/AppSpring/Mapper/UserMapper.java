@@ -6,16 +6,17 @@ import by.lyofchik.AppSpring.Model.DTO.UserResponseDTO;
 import by.lyofchik.AppSpring.Model.Entities.Role;
 import by.lyofchik.AppSpring.Model.Entities.User;
 import by.lyofchik.AppSpring.Service.Hashing.PasswordHasher;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
-@Slf4j
 @Component
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class UserMapper {
-    private static ModelMapper mapper;
+    private final ModelMapper mapper;
 
     public User toUser(RegistrationDTO registrationDTO){
         return User.builder()
@@ -25,7 +26,11 @@ public class UserMapper {
                 .build();
     }
 
-    public static UserResponseDTO toResponseDTO(User user){
+    public UserResponseDTO toResponseDTO(User user){
         return mapper.map(user, UserResponseDTO.class);
+    }
+
+    public User toEntity(UserResponseDTO userDTO){
+        return mapper.map(userDTO, User.class);
     }
 }

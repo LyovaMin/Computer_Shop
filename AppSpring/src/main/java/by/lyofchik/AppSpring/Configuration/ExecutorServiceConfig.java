@@ -36,7 +36,7 @@ public class ExecutorServiceConfig implements AsyncConfigurer{
     }
 
     @Override
-    public AsyncUncaughtExceptionHandler  getAsyncUncaughtExceptionHandler() {
+    public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
         return (ex, method, params) -> {
             log.error("Ошибка в асинхронном методе: {}", method.getName());
             log.error("Исключение: {}", ex.getMessage());

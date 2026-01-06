@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление пользователями | Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/admin-style.css}">
+    <link rel="stylesheet" th:href="@{/css/addiction.css}">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm mb-4">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#"><i class="fas fa-microchip text-primary me-2"></i>PC-ADMIN</a>
+        <div class="navbar-nav me-auto">
+            <a class="nav-link px-3 mx-1" th:classappend="${page == 'product' ? 'active bg-primary text-white rounded' : ''}"
+               th:href="@{/admin}">Товары</a>
+            <a class="nav-link px-3 mx-1" th:classappend="${page == 'users' ? 'active bg-primary text-white rounded' : ''}"
+               th:href="@{/admin/users}">Пользователи</a>
+        </div>
+        <a th:href="@{/shop}" class="btn btn-outline-light btn-sm rounded-pill px-3">В магазин →</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="bg-white p-4 rounded-4 shadow-sm">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold mb-0"><i class="fas fa-users-cog text-primary me-2"></i>Учетные записи</h2>
+            <span class="badge bg-dark rounded-pill" th:text="${users.size() + ' чел.'}"></span>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Пользователь</th>
+                    <th>Роль</th>
+                    <th class="text-end">Управление</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.id}" class="text-muted"></td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="avatar-circle me-3 bg-primary text-white d-flex align-items-center justify-content-center rounded-circle"
+                                 style="width: 35px; height: 35px; font-weight: bold;"
+                                 th:text="${user.userName != null ? #strings.substring(user.userName, 0, 1).toUpperCase() : '?'}">
+                            </div>
+                            <span th:text="${user.userName != null ? user.userName : 'Неизвестно'}" class="fw-semibold"></span>
+                        </div>
+                    </td>
+                    <td>
+                            <span th:classappend="${user.role.name() == 'ADMIN' ? 'badge bg-danger' : 'badge bg-info text-dark'}"
+                                  th:text="${user.role}"></span>
+                    </td>
+                    <td class="text-end">
+                        <button class="btn btn-sm btn-primary px-3 me-2"
+                                data-bs-toggle="modal" th:data-bs-target="${'#editModal' + user.id}">
+                            <i class="fas fa-user-edit"></i>
+                        </button>
+                        <form th:action="@{/admin/users/delete/{id}(id=${user.id})}" th:method="delete" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-outline-danger"
+                                    onclick="return confirm('Удалить пользователя?')"><i class="fas fa-user-times"></i></button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div th:each="user : ${users}">
+    <div class="modal fade" th:id="${'editModal' + user.id}" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form th:action="@{/admin/users/edit}" th:method="put">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-bold"><i class="fas fa-user-shield me-2"></i>Редактирование</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4 bg-white">
+                        <input type="hidden" name="id" th:value="${user.id}">
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold small text-uppercase">Имя пользователя</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                <input type="text" name="username" th:value="${user.userName}"
+                                       class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label fw-bold small text-uppercase">Роль</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-tag"></i></span>
+                                <select name="role" class="form-select">
+                                    <option th:each="r : ${roles}"
+                                            th:value="${r}"
+                                            th:text="${r}"
+                                            th:selected="${r == user.role}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light border px-4" data-bs-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary px-4 fw-bold">Сохранить изменения</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

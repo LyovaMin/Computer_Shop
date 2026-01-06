@@ -1,4 +1,4 @@
-package by.lyofchik.AppSpring.Service.MailService;
+package by.lyofchik.AppSpring.Service.Mail;
 
 import by.lyofchik.AppSpring.Model.DTO.EmailRequest;
 import jakarta.mail.MessagingException;

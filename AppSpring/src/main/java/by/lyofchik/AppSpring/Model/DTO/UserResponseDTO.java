@@ -7,8 +7,12 @@ import lombok.*;
 import java.util.List;
 
 @Builder
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserResponseDTO {
-    private String username;
+    private int id;
+    private String userName;
     private Role role;
-    private List<Sale> sales;
+    private List<SaleDTO> sales;
 }

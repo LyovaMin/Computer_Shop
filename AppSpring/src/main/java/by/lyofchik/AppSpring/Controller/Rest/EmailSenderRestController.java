@@ -1,7 +1,7 @@
 package by.lyofchik.AppSpring.Controller.Rest;
 
 import by.lyofchik.AppSpring.Model.DTO.EmailRequest;
-import by.lyofchik.AppSpring.Service.MailService.MailService;
+import by.lyofchik.AppSpring.Service.Mail.MailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

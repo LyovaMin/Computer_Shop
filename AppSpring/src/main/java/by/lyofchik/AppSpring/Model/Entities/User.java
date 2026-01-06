@@ -36,8 +36,6 @@ public class User {
     @Column(name = "role", nullable = false)
     Role role;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "saleid")
-    @BatchSize(size = 10)
-    List<Sale> sales;
+    @Column(name = "email")
+    private String email;
 }

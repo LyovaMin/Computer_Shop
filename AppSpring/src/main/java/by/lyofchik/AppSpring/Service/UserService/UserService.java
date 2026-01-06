@@ -2,6 +2,7 @@ package by.lyofchik.AppSpring.Service.UserService;
 
 import by.lyofchik.AppSpring.Mapper.UserMapper;
 import by.lyofchik.AppSpring.Model.DTO.UserResponseDTO;
+import by.lyofchik.AppSpring.Model.Entities.Sale;
 import by.lyofchik.AppSpring.Model.Entities.User;
 import by.lyofchik.AppSpring.Repository.UserRepository;
 import by.lyofchik.AppSpring.Service.EntityInterfaces.DeleteEntity;
@@ -22,6 +23,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.StringWriter;
 import java.util.Collections;
 import java.util.List;
@@ -33,18 +35,23 @@ import java.util.Optional;
 public class UserService implements
         ChangePassword,
         DeleteEntity,
-        FindAllEntities<UserResponseDTO>,
+        FindAllEntities<User>,
         FindEntity<User>,
         SaveEntity<User>,
         UserDetailsService {
     private final UserRepository repository;
+    private final UserMapper mapper;
 
     @Override
-    public User changePassword(User user, String newPassword) {
-        var hashPassword = PasswordHasher.hash(newPassword);
-        user.setPassword(hashPassword);
-        repository.save(user);
-        return user;
+    public User changePassword(User user, String oldPassword, String newPassword) throws Exception {
+        String hashPassword = PasswordHasher.hash(oldPassword);
+        if (hashPassword.equals(user.getPassword())) {
+            String hash = PasswordHasher.hash(newPassword);
+            user.setPassword(hash);
+            repository.save(user);
+            return user;
+        }
+        throw new Exception("Password not match");
     }
 
     @Override
@@ -58,10 +65,11 @@ public class UserService implements
     }
 
     @Override
-    public List<UserResponseDTO> findAll() {
-        return repository.findAll().stream()
-                .map(UserMapper::toResponseDTO)
-                .toList();
+    public List<User> findAll() {
+        return repository.findAll();
+//        return repository.findAll().stream()
+//                .map(mapper::toResponseDTO)
+//                .toList();
     }
 
     @Override
@@ -100,12 +108,22 @@ public class UserService implements
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         StringWriter writer = new StringWriter();
+        jaxbMarshaller.marshal(user, new File("meow.xml"));
         jaxbMarshaller.marshal(user, writer);
+        log.info(jaxbMarshaller.toString());
         return writer.toString();
     }
 
     public void deleteById(Integer id) {
         repository.deleteById(id);
+    }
+
+    public User findById(Integer id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    public List<Sale> findAllSales(String username) {
+        return repository.findAllSalesByUserName(username);
     }
 }
 

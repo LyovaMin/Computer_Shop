@@ -24,4 +24,11 @@ public class Product {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "categoryid", nullable = false)
     private Category category;
+
+    @Column(name = "quantity", nullable = false)
+    private int quantity;
+
+//    @OneToOne(fetch = FetchType.EAGER, optional = true)
+//    @JoinColumn(name = "product_description", nullable = true)
+//    private ProductDescription productDescription;
 }

@@ -5,6 +5,35 @@ body {
     padding: 20px;
 }
 
+/* Стили навигации */
+.admin-nav-link {
+    font-weight: 500;
+    color: rgba(255,255,255,0.7) !important;
+    position: relative;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem !important;
+}
+
+.admin-nav-link:hover {
+    color: #fff !important;
+}
+
+.admin-nav-link.active {
+    color: #3b82f6 !important; /* Яркий голубой цвет для активной страницы */
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 8px;
+}
+
+.admin-nav-link i {
+    opacity: 0.8;
+}
+
+/* Эффект при наведении на бренд */
+.navbar-brand:hover .fa-microchip {
+    transform: rotate(20deg);
+    transition: 0.3s;
+}
+
 .admin-container {
     max-width: 900px;
     margin: 0 auto;

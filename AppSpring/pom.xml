@@ -186,45 +186,40 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<!--Generate Java Pojo and Q Classes from the Database-->
+			<plugin>
+				<groupId>com.querydsl</groupId>
+				<artifactId>querydsl-maven-plugin</artifactId>
+				<version>${querydsl.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>export</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<jdbcDriver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbcDriver>
+					<jdbcUrl>jdbc:sqlserver://localhost:1433;database=ComputerShop;integratedSecurity=true;trustServerCertificate=true</jdbcUrl>
+					<exportBeans>true</exportBeans>
+					<packageName>by.lyofchik.AppSpring</packageName>
+					<exportAll>true</exportAll>
+					<columnAnnotations>true</columnAnnotations>
+					<exportForeignKeys>false</exportForeignKeys>
+					<beanAddToString>true</beanAddToString>
+					<targetFolder>${project.build.directory}/generated-sources/java</targetFolder>
+					<sourceFolder>${project.build.directory}/generated-sources/java</sourceFolder>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.oracle</groupId>
+						<artifactId>ojdbc7</artifactId>
+						<version>12.1.0.1</version>
+					</dependency>
+				</dependencies>
+			</plugin>
 		</plugins>
 	</build>
-
-
-<!--	<build>-->
-<!--		<plugins>-->
-<!--			&lt;!&ndash;Generate Java Pojo and Q Classes from the Database&ndash;&gt;-->
-<!--			<plugin>-->
-<!--				<groupId>com.querydsl</groupId>-->
-<!--				<artifactId>querydsl-maven-plugin</artifactId>-->
-<!--				<version>${querydsl.version}</version>-->
-<!--				<executions>-->
-<!--					<execution>-->
-<!--						<goals>-->
-<!--							<goal>export</goal>-->
-<!--						</goals>-->
-<!--					</execution>-->
-<!--				</executions>-->
-<!--				<configuration>-->
-<!--					<jdbcDriver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbcDriver>-->
-<!--					<jdbcUrl>jdbc:sqlserver://localhost:1433;database=ComputerShop;integratedSecurity=true;trustServerCertificate=true</jdbcUrl>-->
-<!--					<exportBeans>true</exportBeans>-->
-<!--					<packageName>by.lyofchik.AppSpring</packageName>-->
-<!--					<exportAll>true</exportAll>-->
-<!--					<columnAnnotations>true</columnAnnotations>-->
-<!--					<exportForeignKeys>false</exportForeignKeys>-->
-<!--					<beanAddToString>true</beanAddToString>-->
-<!--					<targetFolder>${project.build.directory}/generated-sources/java</targetFolder>-->
-<!--					<sourceFolder>${project.build.directory}/generated-sources/java</sourceFolder>-->
-<!--				</configuration>-->
-<!--				<dependencies>-->
-<!--					<dependency>-->
-<!--						<groupId>com.oracle</groupId>-->
-<!--						<artifactId>ojdbc7</artifactId>-->
-<!--						<version>12.1.0.1</version>-->
-<!--					</dependency>-->
-<!--				</dependencies>-->
-<!--			</plugin>-->
-<!--		</plugins>-->
-<!--	</build>-->
 
 </project>

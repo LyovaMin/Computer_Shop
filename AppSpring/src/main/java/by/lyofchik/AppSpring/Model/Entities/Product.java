@@ -11,18 +11,18 @@ import org.hibernate.annotations.BatchSize;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "productid", nullable = false)
+    @Column(name = "product_id", nullable = false)
     private Integer id;
 
-    @Column(name = "productname", nullable = false, length = 64)
+    @Column(name = "product_name", nullable = false, length = 64)
     private String productName;
 
     @Column(name = "price", nullable = false)
-    private Integer price;
+    private Double price;
 
     //@BatchSize(size = 10)
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "categoryid", nullable = false)
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
     @Column(name = "quantity", nullable = false)

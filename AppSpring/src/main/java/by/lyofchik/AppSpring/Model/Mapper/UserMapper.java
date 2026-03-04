@@ -1,4 +1,4 @@
-package by.lyofchik.AppSpring.Mapper;
+package by.lyofchik.AppSpring.Model.Mapper;
 
 import by.lyofchik.AppSpring.Configuration.MapperConfig;
 import by.lyofchik.AppSpring.Model.DTO.RegistrationDTO;

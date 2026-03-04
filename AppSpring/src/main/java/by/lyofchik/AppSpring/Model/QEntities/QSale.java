@@ -2,7 +2,7 @@ package by.lyofchik.AppSpring.Model.QEntities;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import by.lyofchik.AppSpring.Model.Entities.QUser;
+import by.lyofchik.AppSpring.Model.QEntities.QUser;
 import by.lyofchik.AppSpring.Model.Entities.Sale;
 import com.querydsl.core.types.dsl.*;
 

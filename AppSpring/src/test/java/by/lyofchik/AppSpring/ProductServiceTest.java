@@ -31,7 +31,7 @@ class ProductServiceTest {
         Product mockProduct = new Product();
                 //Product.builder().productName(productName).price(129.0).build();
         mockProduct.setProductName(productName);
-        mockProduct.setPrice(129);
+        mockProduct.setPrice(129.00);
         when(repository.findByProductName(productName)).thenReturn(Optional.of(mockProduct));
 
         // Act

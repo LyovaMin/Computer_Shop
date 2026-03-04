@@ -16,19 +16,21 @@ import java.time.LocalDate;
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "saleid", nullable = false)
+    @Column(name = "sale_id", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "userid", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "productid", nullable = false)
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
     @ColumnDefault("getDate()")
-    @Column(name = "saledate", nullable = false)
+    @Column(name = "sale_date", nullable = false)
     private LocalDate saleDate;
 
+    @Column(name = "price")
+    private Double price;
 }

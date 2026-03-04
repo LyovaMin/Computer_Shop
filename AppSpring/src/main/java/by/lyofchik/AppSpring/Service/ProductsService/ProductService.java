@@ -1,7 +1,7 @@
 package by.lyofchik.AppSpring.Service.ProductsService;
 
 import by.lyofchik.AppSpring.Filter.ProductFilter;
-import by.lyofchik.AppSpring.Mapper.ProductMapper;
+import by.lyofchik.AppSpring.Model.Mapper.ProductMapper;
 import by.lyofchik.AppSpring.Model.DTO.QPredicate;
 import by.lyofchik.AppSpring.Model.Entities.Product;
 import by.lyofchik.AppSpring.Repository.ProductRepository;

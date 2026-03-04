@@ -1,7 +1,6 @@
 package by.lyofchik.AppSpring.Service.UserService;
 
-import by.lyofchik.AppSpring.Mapper.UserMapper;
-import by.lyofchik.AppSpring.Model.DTO.UserResponseDTO;
+import by.lyofchik.AppSpring.Model.Mapper.UserMapper;
 import by.lyofchik.AppSpring.Model.Entities.Sale;
 import by.lyofchik.AppSpring.Model.Entities.User;
 import by.lyofchik.AppSpring.Repository.UserRepository;
@@ -15,7 +14,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
-import jakarta.xml.bind.PropertyException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -44,8 +42,7 @@ public class UserService implements
 
     @Override
     public User changePassword(User user, String oldPassword, String newPassword) throws Exception {
-        String hashPassword = PasswordHasher.hash(oldPassword);
-        if (hashPassword.equals(user.getPassword())) {
+        if (PasswordHasher.check(oldPassword, user.getPassword())) {
             String hash = PasswordHasher.hash(newPassword);
             user.setPassword(hash);
             repository.save(user);

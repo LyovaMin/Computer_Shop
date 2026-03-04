@@ -1,7 +1,6 @@
 package by.lyofchik.AppSpring.Controller.Web;
 
-import by.lyofchik.AppSpring.CustomException.CustomException;
-import by.lyofchik.AppSpring.Mapper.UserMapper;
+import by.lyofchik.AppSpring.Model.Mapper.UserMapper;
 import by.lyofchik.AppSpring.Model.DTO.RegistrationDTO;
 import by.lyofchik.AppSpring.Model.Entities.User;
 import by.lyofchik.AppSpring.Service.UserService.UserService;
@@ -28,6 +27,7 @@ import java.util.Collections;
 public class RegistrationController {
     UserService userService;
     UserMapper userMapper;
+//    NotificationService notificationService;
 
     @GetMapping
     public String registrationPage(@ModelAttribute RegistrationDTO registrationDTO,
@@ -86,6 +86,7 @@ public class RegistrationController {
             return "redirect:/login"; // Если что-то пошло не так, отправляем на обычный вход
         }
 
+//        notificationService.sendNotification();
         return "redirect:/shop";
     }
 

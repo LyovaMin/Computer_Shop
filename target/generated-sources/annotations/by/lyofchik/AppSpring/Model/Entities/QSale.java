@@ -24,6 +24,8 @@ public class QSale extends EntityPathBase<Sale> {
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
+    public final NumberPath<Double> price = createNumber("price", Double.class);
+
     public final QProduct product;
 
     public final DatePath<java.time.LocalDate> saleDate = createDate("saleDate", java.time.LocalDate.class);

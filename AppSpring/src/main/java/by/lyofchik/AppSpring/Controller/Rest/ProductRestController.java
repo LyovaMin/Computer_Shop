@@ -2,7 +2,7 @@ package by.lyofchik.AppSpring.Controller.Rest;
 
 import by.lyofchik.AppSpring.CustomException.CustomException;
 import by.lyofchik.AppSpring.Filter.ProductFilter;
-import by.lyofchik.AppSpring.Mapper.ProductMapper;
+import by.lyofchik.AppSpring.Model.Mapper.ProductMapper;
 import by.lyofchik.AppSpring.Model.DTO.ProductDTO;
 import by.lyofchik.AppSpring.Model.Entities.Product;
 import by.lyofchik.AppSpring.Service.ProductsService.ProductService;
@@ -12,8 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/products")

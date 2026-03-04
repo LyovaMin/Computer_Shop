@@ -1,6 +1,6 @@
 package by.lyofchik.AppSpring;
 
-import by.lyofchik.AppSpring.Mapper.UserMapper;
+import by.lyofchik.AppSpring.Model.Mapper.UserMapper;
 import by.lyofchik.AppSpring.Model.Entities.Role;
 import by.lyofchik.AppSpring.Model.Entities.User;
 import by.lyofchik.AppSpring.Service.UserService.UserService;

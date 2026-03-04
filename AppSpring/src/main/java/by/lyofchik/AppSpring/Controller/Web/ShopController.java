@@ -7,6 +7,7 @@ import by.lyofchik.AppSpring.Model.Entities.Product;
 import by.lyofchik.AppSpring.Model.Entities.Role;
 import by.lyofchik.AppSpring.Model.Entities.Sale;
 import by.lyofchik.AppSpring.Model.Entities.User;
+import by.lyofchik.AppSpring.Service.FavoriteService.FavoriteService;
 import by.lyofchik.AppSpring.Service.ProductsService.ProductService;
 import by.lyofchik.AppSpring.Service.SaleService.SaleService;
 import by.lyofchik.AppSpring.Service.UserService.UserService;
@@ -42,6 +43,7 @@ public class ShopController {
     SaleService saleService;
     UserService userService;
     List<Product> productsCart;
+    FavoriteService favoriteService;
 
     @GetMapping
     public String shop(Model model,
@@ -83,6 +85,7 @@ public class ShopController {
                 .product(product)
                 .user(user)
                 .saleDate(LocalDate.now())
+                .price(product.getPrice())
                 .build());
 
         model.addAttribute("purchasedProducts", purchasedProducts);
@@ -112,6 +115,7 @@ public class ShopController {
                             .product(product)
                             .user(user)
                             .saleDate(LocalDate.now())
+                            .price(product.getPrice())
                             .build()
             );
         }
@@ -127,5 +131,12 @@ public class ShopController {
     @DeleteMapping("/delete")
     public void delete(Product product) {
         productService.delete(product);
+    }
+
+    @PostMapping("/addToFavorite")
+    public void save(Product product) {
+        String authName = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.find(authName).orElseThrow();
+        favoriteService.save(product, user);
     }
 }

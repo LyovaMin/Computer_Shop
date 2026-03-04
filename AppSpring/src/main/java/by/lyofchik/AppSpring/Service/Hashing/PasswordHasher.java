@@ -10,4 +10,8 @@ public class PasswordHasher {
     public static String hash(String password) {
         return encoder.encode(password);
     }
+
+    public static boolean check(String password, String hash) {
+        return encoder.matches(password, hash);
+    }
 }

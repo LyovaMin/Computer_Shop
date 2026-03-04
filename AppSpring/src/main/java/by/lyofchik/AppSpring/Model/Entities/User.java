@@ -2,6 +2,7 @@ package by.lyofchik.AppSpring.Model.Entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.*;
@@ -20,7 +21,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userid", nullable = false)
+    @Column(name = "user_id", nullable = false)
     private Integer id;
 
     @Column(name = "username", nullable = false, length = 64)
@@ -37,5 +38,6 @@ public class User {
     Role role;
 
     @Column(name = "email")
+    @Email(message = "Некорректный email")
     private String email;
 }
